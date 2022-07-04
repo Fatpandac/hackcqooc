@@ -12,6 +12,7 @@ pre-commit = "*"
 pytest = "*"
 pytest-cov = "*"
 pytest-sugar = "*"
+twine = "*"
 
 [requires]
 python_version = "3"

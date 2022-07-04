@@ -9,7 +9,7 @@ from src.api_url import ApiUrl
 import json
 
 
-class Core:
+class Hackcqooc:
     def __init__(self, username: str, pwd: str) -> None:
         self.__processer = Processer()
         self.__request = Request()
