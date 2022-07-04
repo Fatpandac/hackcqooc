@@ -10,7 +10,9 @@ import json
 
 
 class Core:
-    def __init__(self, username: str = "", pwd: str = "", cookie: str = None) -> None:
+    def __init__(
+        self, username: str = "", pwd: str = "", cookie: str = None
+    ) -> None:
         self.__processer = Processer()
         self.__request = Request()
         self.__api_url = ApiUrl()
@@ -143,9 +145,13 @@ class Core:
         else:
             return Msg().processing("跳过课程失败", 400)
 
-    def get_exam_papers_info(self, course_id: str, start: int = 0, limit: int = 200) -> dict:
+    def get_exam_papers_info(
+        self, course_id: str, start: int = 0, limit: int = 200
+    ) -> dict:
         exam_papers = self.__request.do_get(
-            self.__api_url.exam_papers_api(course_id, start=start, limit=limit),
+            self.__api_url.exam_papers_api(
+                course_id, start=start, limit=limit
+            ),
             headers={
                 "Referer": "http://www.cqooc.com/my/learn",
                 "Host": "www.cqooc.com",
@@ -156,7 +162,9 @@ class Core:
             "获取测验列表成功", 200, self.__user.get_exam_papers_data()
         )
 
-    def get_exams_info(self, course_id: str, start: int = 0, limit: int = 200) -> dict:
+    def get_exams_info(
+        self, course_id: str, start: int = 0, limit: int = 200
+    ) -> dict:
         exams = self.__request.do_get(
             self.__api_url.exams_api(course_id, start=start, limit=limit),
             headers={
@@ -165,11 +173,11 @@ class Core:
             },
         )
         self.__user.set_exams_data(exams.json().copy())
-        return Msg().processing(
-            "获取考试列表成功", 200, self.__user.get_exams_data()
-        )
+        return Msg().processing("获取考试列表成功", 200, self.__user.get_exams_data())
 
-    def get_tasks_info(self, course_id: str, start: int = 0, limit: int = 200) -> dict:
+    def get_tasks_info(
+        self, course_id: str, start: int = 0, limit: int = 200
+    ) -> dict:
         tasks = self.__request.do_get(
             self.__api_url.tasks_api(course_id, start=start, limit=limit),
             headers={
@@ -178,11 +186,11 @@ class Core:
             },
         )
         self.__user.set_tasks_data(tasks.json().copy())
-        return Msg().processing(
-            "获取作业列表成功", 200, self.__user.get_tasks_data()
-        )
+        return Msg().processing("获取作业列表成功", 200, self.__user.get_tasks_data())
 
-    def get_chapters_info(self, course_id: str, start: int = 0, limit: int = 200) -> dict:
+    def get_chapters_info(
+        self, course_id: str, start: int = 0, limit: int = 200
+    ) -> dict:
         chapters = self.__request.do_get(
             self.__api_url.chapters_api(course_id, start=start, limit=limit),
             headers={
