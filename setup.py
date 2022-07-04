@@ -18,7 +18,7 @@ URL = "https://github.com/Fatpandac/hackcqooc"
 EMAIL = "i@Fatpandac.com"
 AUTHOR = "Fatpandac"
 REQUIRES_PYTHON = ">=3.0.0"
-VERSION = "0.1.0"
+VERSION = "0.0.2"
 
 # What packages are required for this module to be executed?
 REQUIRED = [
