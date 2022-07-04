@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from src.request import Request
+from hackcqooc.request import Request
 
 
 ua = (

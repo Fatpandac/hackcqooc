@@ -2,7 +2,7 @@
 
 一个重庆高校在线开放课程平台自动化工具包。
 
-## [Hackcqooc 的使用样例](./sample.py)
+## [Hackcqooc 的使用样例](https://github.com/Fatpandac/hackcqooc/blob/main/sample.py)
 
 在终端环境中分别设置变量 `USERS` 和 `PASSWORD`
 后运行 `python3 sample.py` 它将会告诉你 Hackcqooc 的运行方式。

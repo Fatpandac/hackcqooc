@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
-from src.request import Request
-from src.user import User
-from src.msg import Msg
-from src.test import test
-from src.processer import Processer
-from src.api_url import ApiUrl
+from hackcqooc.request import Request
+from hackcqooc.user import User
+from hackcqooc.msg import Msg
+from hackcqooc.test import test
+from hackcqooc.processer import Processer
+from hackcqooc.api_url import ApiUrl
 
 import json
 
 
-class Hackcqooc:
+class Core:
     def __init__(self, username: str, pwd: str) -> None:
         self.__processer = Processer()
         self.__request = Request()

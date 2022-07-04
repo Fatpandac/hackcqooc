@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from src.processer import Processer
+from hackcqooc.processer import Processer
 
 section_data = {
     "chapterId": "23129809",

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from src.user import User
+from hackcqooc.user import User
 
 xsid = "ASD121AS1"
 id = 121324

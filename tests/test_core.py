@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from src.hackcqooc import Hackcqooc
+from hackcqooc.core import Core
 
 import os
 
@@ -13,7 +13,7 @@ password = os.environ.get("PASSWORD")
 def test_login_success():
     if (username is None) or (password is None):
         print("!!! 请设置环境变量：USERS 和 PASSWORD !!!")
-    core = Hackcqooc(username, password)
+    core = Core(username, password)
     res = core.login()
     assert res["code"] == 200
     assert res["msg"] == "登录成功"
@@ -22,7 +22,7 @@ def test_login_success():
 def test_login_fail():
     username_fail = "test"
     password_fail = "1234567"
-    core = Hackcqooc(username_fail, password_fail)
+    core = Core(username_fail, password_fail)
     res = core.login()
     assert res["code"] == 400
     assert res["msg"] == "登录失败，可能需要官网登录后重试"
@@ -30,7 +30,7 @@ def test_login_fail():
 
 
 def test_get_info():
-    core = Hackcqooc(username, password)
+    core = Core(username, password)
     res = core.get_user_info()
     assert res["username"] == username
     assert res["pwd"] == password
@@ -40,7 +40,7 @@ def test_get_info():
 
 
 def test_get_course():
-    core = Hackcqooc(username, password)
+    core = Core(username, password)
     core.login()
     res = core.get_course()
     assert res["code"] == 200
@@ -49,7 +49,7 @@ def test_get_course():
 
 
 def test_get_course_lessons():
-    core = Hackcqooc(username, password)
+    core = Core(username, password)
     core.login()
     res = core.get_course_lessons(core.get_course()["data"][0]["courseId"])
     assert res["code"] == 200

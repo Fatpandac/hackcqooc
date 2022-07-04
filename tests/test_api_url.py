@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from src.api_url import ApiUrl
+from hackcqooc.api_url import ApiUrl
 
 import time
 
