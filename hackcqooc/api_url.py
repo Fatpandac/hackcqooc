@@ -68,5 +68,34 @@ class ApiUrl:
             + f"&ts={self.__get_ts()}"
         )
 
-    def skip_section_api(self) -> str:
+    def exam_papers_api(self, course_id: str, start: int = 0, limit: int = 200) -> str:
+        return (
+                "http://www.cqooc.com/json/exam/papers"
+                + f"?limit={limit}&start={start}&courseId={course_id}"
+                  f"&ts={self.__get_ts()}"
+        )
+
+    def exams_api(self, course_id: str, start: int = 0, limit: int = 200) -> str:
+        return (
+                "http://www.cqooc.com/json/exams"
+                + f"?limit={limit}&start={start}&courseId={course_id}"
+                  f"&ts={self.__get_ts()}"
+        )
+
+    def tasks_api(self, course_id: str, start: int = 0, limit: int = 200) -> str:
+        return (
+                "http://www.cqooc.com/json/tasks"
+                + f"?limit={limit}&start={start}&courseId={course_id}"
+                + f"&ts={self.__get_ts()}"
+        )
+
+    def chapters_api(self, course_id: str, start: int = 0, limit: int = 200) -> str:
+        return (
+                "http://www.cqooc.com/json/chapters"
+                + f"?limit={limit}&start={start}&courseId={course_id}"
+                + f"&ts={self.__get_ts()}"
+        )
+
+    @staticmethod
+    def skip_section_api() -> str:
         return "http://www.cqooc.com/learnLog/api/add"

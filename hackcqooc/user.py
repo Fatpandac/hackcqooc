@@ -8,6 +8,10 @@ class User:
     __name = None
     __course_data = None
     __lessons_data = None
+    __exam_papers_data = None
+    __exams_data = None
+    __tasks_data = None
+    __chapters_data = None
     __mcs_id = None
 
     def __init__(self, username: str, pwd: str) -> None:
@@ -61,6 +65,30 @@ class User:
 
     def get_mcs_id(self) -> str:
         return self.__mcs_id
+
+    def set_exam_papers_data(self, exam_papers_data: dict) -> None:
+        self.__exam_papers_data = exam_papers_data
+
+    def get_exam_papers_data(self) -> dict:
+        return self.__exam_papers_data
+
+    def set_exams_data(self, exams_data: dict) -> None:
+        self.__exams_data = exams_data
+
+    def get_exams_data(self) -> dict:
+        return self.__exams_data
+
+    def set_tasks_data(self, tasks_data: dict) -> None:
+        self.__tasks_data = tasks_data
+
+    def get_tasks_data(self) -> dict:
+        return self.__tasks_data
+
+    def set_chapters_data(self, chapters_data: dict) -> None:
+        self.__chapters_data = chapters_data
+
+    def get_chapters_data(self) -> dict:
+        return self.__chapters_data
 
     def get_info(self) -> dict:
         return {
