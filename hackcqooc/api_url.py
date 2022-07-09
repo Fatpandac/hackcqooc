@@ -37,7 +37,7 @@ class ApiUrl:
         )
 
     def lessons_api(
-        self, course_id: str, start: int = 0, limit: int = 100
+        self, course_id: str, start: int = 0, limit: int = 200
     ) -> str:
         return (
             "http://www.cqooc.com/json/mooc/lessons"

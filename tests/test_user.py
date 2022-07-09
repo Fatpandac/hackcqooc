@@ -2,6 +2,7 @@
 from hackcqooc.user import User
 
 xsid = "ASD121AS1"
+cookie = "xsid=ASD121AS1"
 id = 121324
 username = "122132421"
 pwd = "123456"
@@ -62,6 +63,11 @@ def test_get_and_set_mcs_id():
     user = User(username, pwd)
     user.set_mcs_id(id)
     assert user.get_mcs_id() == id
+
+
+def test_get_cookie():
+    user = User(cookie=cookie)
+    assert user.get_cookie() == cookie
 
 
 def test_get_info():

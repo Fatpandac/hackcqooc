@@ -55,3 +55,39 @@ def test_get_course_lessons():
     assert res["code"] == 200
     assert res["status"] == "ok"
     assert res["data"] is not None
+
+
+def test_get_exam_papers_info():
+    core = Core(username, password)
+    core.login()
+    res = core.get_exam_papers_info(core.get_course()["data"][0]["courseId"])
+    assert res["code"] == 200
+    assert res["status"] == "ok"
+    assert res["data"] is not None
+
+
+def test_get_exams_info():
+    core = Core(username, password)
+    core.login()
+    res = core.get_exams_info(core.get_course()["data"][0]["courseId"])
+    assert res["code"] == 200
+    assert res["status"] == "ok"
+    assert res["data"] is not None
+
+
+def test_get_tasks_info():
+    core = Core(username, password)
+    core.login()
+    res = core.get_tasks_info(core.get_course()["data"][0]["courseId"])
+    assert res["code"] == 200
+    assert res["status"] == "ok"
+    assert res["data"] is not None
+
+
+def test_get_chapters_info():
+    core = Core(username, password)
+    core.login()
+    res = core.get_chapters_info(core.get_course()["data"][0]["courseId"])
+    assert res["code"] == 200
+    assert res["status"] == "ok"
+    assert res["data"] is not None
