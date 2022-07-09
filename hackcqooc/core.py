@@ -64,7 +64,7 @@ class Core:
         self.__request.set_headers("Cookie", self.__user.get_cookie())
         try:
             self.__process_user_info()
-        except:
+        except Exception:
             return Msg().processing("登录失败，可能需要官网登录后重试", 400)
         return Msg().processing("登录成功", 200)
 
@@ -180,7 +180,8 @@ class Core:
         exams = self.__request.do_get(
             self.__api_url.exams_api(course_id, start=start, limit=limit),
             headers={
-                "Referer": f"http://www.cqooc.com/learn/mooc/structure?id={course_id}",
+                "Referer": "http://www.cqooc.com/learn"
+                + f"/mooc/structure?id={course_id}",
                 "Host": "www.cqooc.com",
             },
         )
@@ -206,7 +207,8 @@ class Core:
         chapters = self.__request.do_get(
             self.__api_url.chapters_api(course_id, start=start, limit=limit),
             headers={
-                "Referer": f"http://www.cqooc.com/learn/mooc/progress?id={course_id}",
+                "Referer": "http://www.cqooc.com/learn"
+                + f"/mooc/progress?id={course_id}",
                 "Host": "www.cqooc.com",
             },
         )
