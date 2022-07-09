@@ -13,10 +13,14 @@ class User:
     __tasks_data = None
     __chapters_data = None
     __mcs_id = None
+    __cookie = None
 
-    def __init__(self, username: str, pwd: str) -> None:
+    def __init__(
+        self, username: str = "", pwd: str = "", cookie: str = None
+    ) -> None:
         self.__username = username
         self.__pwd = pwd
+        self.__cookie = cookie
 
     def set_xsid(self, xsid: str) -> None:
         self.__xsid = xsid
@@ -89,6 +93,9 @@ class User:
 
     def get_chapters_data(self) -> dict:
         return self.__chapters_data
+
+    def get_cookie(self) -> str:
+        return self.__cookie
 
     def get_info(self) -> dict:
         return {

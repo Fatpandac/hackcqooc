@@ -16,10 +16,7 @@ class Core:
         self.__processer = Processer()
         self.__request = Request()
         self.__api_url = ApiUrl()
-        self.__user = User(username, pwd)
-        if cookie:
-            self.__request.set_headers("Cookie", cookie)
-            self.__process_user_info()
+        self.__user = User(username, pwd, cookie)
 
     def __process_user_info(self) -> None:
         id_res = self.__request.do_get(
@@ -32,7 +29,7 @@ class Core:
         info_data = info_res.json()
         self.__user.set_name(info_data["name"])
 
-    def login(self) -> dict:
+    def __login_by_pwd(self) -> dict:
         api = self.__api_url.get_nonce_api()
         nonce_res = self.__request.do_get(
             api,
@@ -62,6 +59,21 @@ class Core:
             return Msg().processing("登录成功", 200, data)
         else:
             return Msg().processing("登录失败，可能需要官网登录后重试", 400, data)
+
+    def __login_by_cookie(self) -> dict:
+        self.__request.set_headers("Cookie", self.__user.get_cookie())
+        try:
+            self.__process_user_info()
+        except:
+            return Msg().processing("登录失败，可能需要官网登录后重试", 400)
+        return Msg().processing("登录成功", 200)
+
+    def login(self) -> dict:
+        return (
+            self.__login_by_pwd()
+            if self.__user.get_cookie() is None
+            else self.__login_by_cookie()
+        )
 
     def get_user_info(self) -> dict:
         return Msg().processing("登录成功", 200, self.__user.get_info())
