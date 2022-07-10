@@ -10,11 +10,13 @@ import json
 
 
 class Core:
-    def __init__(self, username: str, pwd: str) -> None:
+    def __init__(
+        self, username: str = "", pwd: str = "", cookie: str = None
+    ) -> None:
         self.__processer = Processer()
         self.__request = Request()
         self.__api_url = ApiUrl()
-        self.__user = User(username, pwd)
+        self.__user = User(username, pwd, cookie)
 
     def __process_user_info(self) -> None:
         id_res = self.__request.do_get(
@@ -27,7 +29,7 @@ class Core:
         info_data = info_res.json()
         self.__user.set_name(info_data["name"])
 
-    def login(self) -> dict:
+    def __login_by_pwd(self) -> dict:
         api = self.__api_url.get_nonce_api()
         nonce_res = self.__request.do_get(
             api,
@@ -57,6 +59,21 @@ class Core:
             return Msg().processing("登录成功", 200, data)
         else:
             return Msg().processing("登录失败，可能需要官网登录后重试", 400, data)
+
+    def __login_by_cookie(self) -> dict:
+        self.__request.set_headers("Cookie", self.__user.get_cookie())
+        try:
+            self.__process_user_info()
+        except Exception:
+            return Msg().processing("登录失败，可能需要官网登录后重试", 400)
+        return Msg().processing("登录成功", 200)
+
+    def login(self) -> dict:
+        return (
+            self.__login_by_pwd()
+            if self.__user.get_cookie() is None
+            else self.__login_by_cookie()
+        )
 
     def get_user_info(self) -> dict:
         return Msg().processing("登录成功", 200, self.__user.get_info())
@@ -139,3 +156,63 @@ class Core:
             return Msg().processing("非法操作", 400)
         else:
             return Msg().processing("跳过课程失败", 400)
+
+    def get_exam_papers_info(
+        self, course_id: str, start: int = 0, limit: int = 200
+    ) -> dict:
+        exam_papers = self.__request.do_get(
+            self.__api_url.exam_papers_api(
+                course_id, start=start, limit=limit
+            ),
+            headers={
+                "Referer": "http://www.cqooc.com/my/learn",
+                "Host": "www.cqooc.com",
+            },
+        )
+        self.__user.set_exam_papers_data(exam_papers.json().copy())
+        return Msg().processing(
+            "获取测验列表成功", 200, self.__user.get_exam_papers_data()
+        )
+
+    def get_exams_info(
+        self, course_id: str, start: int = 0, limit: int = 200
+    ) -> dict:
+        exams = self.__request.do_get(
+            self.__api_url.exams_api(course_id, start=start, limit=limit),
+            headers={
+                "Referer": "http://www.cqooc.com/learn"
+                + f"/mooc/structure?id={course_id}",
+                "Host": "www.cqooc.com",
+            },
+        )
+        self.__user.set_exams_data(exams.json().copy())
+        return Msg().processing("获取考试列表成功", 200, self.__user.get_exams_data())
+
+    def get_tasks_info(
+        self, course_id: str, start: int = 0, limit: int = 200
+    ) -> dict:
+        tasks = self.__request.do_get(
+            self.__api_url.tasks_api(course_id, start=start, limit=limit),
+            headers={
+                "Referer": "http://www.cqooc.com/my/learn",
+                "Host": "www.cqooc.com",
+            },
+        )
+        self.__user.set_tasks_data(tasks.json().copy())
+        return Msg().processing("获取作业列表成功", 200, self.__user.get_tasks_data())
+
+    def get_chapters_info(
+        self, course_id: str, start: int = 0, limit: int = 200
+    ) -> dict:
+        chapters = self.__request.do_get(
+            self.__api_url.chapters_api(course_id, start=start, limit=limit),
+            headers={
+                "Referer": "http://www.cqooc.com/learn"
+                + f"/mooc/progress?id={course_id}",
+                "Host": "www.cqooc.com",
+            },
+        )
+        self.__user.set_chapters_data(chapters.json().copy())
+        return Msg().processing(
+            "获取章节列表成功", 200, self.__user.get_chapters_data()
+        )

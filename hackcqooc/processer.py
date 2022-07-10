@@ -5,7 +5,8 @@ import requests
 
 
 class Processer:
-    def process_course_data(self, course_res: requests.Response) -> dict:
+    @staticmethod
+    def process_course_data(course_res: requests.Response) -> dict:
         res_course_data = json.loads(course_res.text)
         course_data = {}
         course_data["meta"] = res_course_data["meta"]
@@ -20,8 +21,8 @@ class Processer:
             )
         return course_data
 
+    @staticmethod
     def process_lessons_data(
-        self,
         username: str,
         lessons_res: requests.Response,
         lessons_status_res: requests.Response,
@@ -60,7 +61,8 @@ class Processer:
         )
         return lessons_data
 
-    def process_section_data(self, section_data: dict, mcs_id: str) -> dict:
+    @staticmethod
+    def process_section_data(section_data: dict, mcs_id: str) -> dict:
         post_data = {}
         post_data["action"] = 0
         post_data["category"] = 2
