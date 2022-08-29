@@ -7,6 +7,7 @@ from hackcqooc.processer import Processer
 from hackcqooc.api_url import ApiUrl
 
 import json
+from requests import exceptions
 
 
 class Core:
@@ -39,12 +40,12 @@ class Core:
         )
         data = nonce_res.json()
         cn = test.cnonce()
-        hash = test.getEncodePwd(
+        login_hash = test.getEncodePwd(
             data["nonce"] + test.getEncodePwd(self.__user.get_pwd()) + cn
         )
         login_res = self.__request.do_post(
             self.__api_url.login_api(
-                self.__user.get_username(), hash, data["nonce"], cn
+                self.__user.get_username(), login_hash, data["nonce"], cn
             ),
             headers={
                 "Referer": "http://www.cqooc.com/login",
@@ -64,7 +65,7 @@ class Core:
         self.__request.set_headers("Cookie", self.__user.get_cookie())
         try:
             self.__process_user_info()
-        except Exception:
+        except exceptions.RequestException:
             return Msg().processing("登录失败，可能需要官网登录后重试", 400)
         return Msg().processing("登录成功", 200)
 

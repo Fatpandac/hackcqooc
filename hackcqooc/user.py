@@ -2,7 +2,7 @@
 class User:
 
     __xsid = None
-    __id = None
+    __sid = None
     __username = None
     __pwd = None
     __name = None
@@ -28,11 +28,11 @@ class User:
     def get_xsid(self) -> str:
         return self.__xsid
 
-    def set_id(self, id: int) -> None:
-        self.__id = id
+    def set_id(self, sid: int) -> None:
+        self.__sid = sid
 
     def get_id(self) -> int:
-        return self.__id
+        return self.__sid
 
     def set_username(self, username: str) -> None:
         self.__username = username
@@ -100,7 +100,7 @@ class User:
     def get_info(self) -> dict:
         return {
             "xsid": self.__xsid,
-            "id": self.__id,
+            "id": self.__sid,
             "username": self.__username,
             "pwd": self.__pwd,
             "name": self.__name,

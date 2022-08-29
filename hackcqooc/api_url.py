@@ -29,7 +29,7 @@ class ApiUrl:
             + f"&nonce={nonce}&cnonce={cn}"
         )
 
-    def course_api(self, id: str, limit: int) -> str:
+    def course_api(self, id: int, limit: int) -> str:
         return (
             "http://www.cqooc.com/json/mcs?sortby=id&reverse=true&del=2"
             + f"&courseType=2&ownerId={id}&limit={limit}"
@@ -54,7 +54,7 @@ class ApiUrl:
             + f"&select=sectionId&username={username}&ts={self.__get_ts()}"
         )
 
-    def mcs_id_api(self, owner_id: str, course_id: str) -> str:
+    def mcs_id_api(self, owner_id: int, course_id: str) -> str:
         return (
             "http://www.cqooc.com/json/mcs"
             + f"?ownerId={owner_id}&courseId={course_id}"

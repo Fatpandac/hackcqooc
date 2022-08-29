@@ -10,7 +10,9 @@ class Msg:
             "status": "fail",
         }
 
-    def processing(self, msg: str, code: int, res: dict = {}) -> dict:
+    def processing(self, msg: str, code: int, res: dict = None) -> dict:
+        if res is None:
+            res = {}
         if code == 200:
             res["code"] = self.__sussess["code"]
             res["status"] = self.__sussess["status"]

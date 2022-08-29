@@ -51,7 +51,7 @@ class Request:
     def do_post(
         self,
         url: str,
-        data: dict = None,
+        data: [dict, str] = None,
         headers: dict = None,
         proxies: dict = None,
     ) -> requests.Response:

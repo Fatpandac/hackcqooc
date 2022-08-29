@@ -8,7 +8,7 @@ class Processer:
     @staticmethod
     def process_course_data(course_res: requests.Response) -> dict:
         res_course_data = json.loads(course_res.text)
-        course_data = {}
+        course_data = dict()
         course_data["meta"] = res_course_data["meta"]
         course_data["data"] = []
         for course in res_course_data["data"]:
@@ -29,7 +29,7 @@ class Processer:
     ) -> dict:
         lessons_res_data = json.loads(lessons_res.text)
         lessons_status_res_data = json.loads(lessons_status_res.text)
-        lessons_data = {}
+        lessons_data = dict()
         lessons_data["meta"] = lessons_res_data["meta"]
         lessons_data["data"] = []
         for lesson in lessons_res_data["data"]:
@@ -63,7 +63,7 @@ class Processer:
 
     @staticmethod
     def process_section_data(section_data: dict, mcs_id: str) -> dict:
-        post_data = {}
+        post_data = dict()
         post_data["action"] = 0
         post_data["category"] = 2
         post_data["chapterId"] = section_data["chapterId"]
