@@ -26,18 +26,18 @@ def main():
     print_green_sentence(f"core = Core({username}, {password})")
     core = Core(username, password)
 
-    # Stpe 2
-    print_red_sentence("\nStpe 2, login to the cqooc, get cookies")
+    # Step 2
+    print_red_sentence("\nStep 2, login to the cqooc, get cookies")
     print_green_sentence("core.login()")
     print_dict(core.login())
 
-    # Stpe 3
+    # Step 3
     print_red_sentence("\nStep 3, get the course list")
     print_green_sentence("core.get_course()")
     print_dict(core.get_course())
 
-    # Stpe 4
-    print_red_sentence("\nStpe 4, get lesson list by course id")
+    # Step 4
+    print_red_sentence("\nStep 4, get lesson list by course id")
     print_green_sentence("core.get_lesson_list(course_id)")
     lesson_data = core.get_course_lessons(
         core.get_user_info()["course_data"]["data"][0]["courseId"]

@@ -2,7 +2,6 @@
 
 from hackcqooc.request import Request
 
-
 ua = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"
     + " AppleWebKit/537.36 (KHTML, like Gecko)"
@@ -16,13 +15,15 @@ proxies = {
 
 proxiesURI = "http://127.0.0.1:8889"
 
+host = "http://www.cqooc.com"
+
 
 def test_get_ua():
     request = Request()
     assert request.get_headers()["User-Agent"] == ua
 
 
-def test_set_cookie_into_headers():
+def test_set_cookies():
     request = Request()
     request.set_headers("cookie", "12345678")
     assert request.get_headers()["cookie"] == "12345678"
@@ -47,13 +48,12 @@ def test_set_proxies():
     request.set_proxies("http", "")
 
 
+def test_get_host():
+    request = Request()
+    assert request.get_host() == host
+
+
 def test_do_get():
     request = Request()
-    res = request.do_get(
-        "https://www.google.com",
-        proxies={
-            "http": "http://127.0.0.1:8889",
-            "https": "http://127.0.0.1:8889",
-        },
-    )
+    res = request.do_get("https://www.baidu.com", proxies=proxies)
     assert res.status_code == 200

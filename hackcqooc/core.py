@@ -7,7 +7,6 @@ from hackcqooc.processor import Processor
 from hackcqooc.api_url import ApiUrl
 
 import json
-from requests import exceptions
 
 
 class Core:
@@ -65,9 +64,10 @@ class Core:
         self.__request.set_headers("Cookie", self.__user.get_cookie())
         try:
             self.__process_user_info()
-        except exceptions.RequestException:
+        except KeyError:
             return Msg().processing("登录失败，可能需要官网登录后重试", 400)
-        return Msg().processing("登录成功", 200)
+        else:
+            return Msg().processing("登录成功", 200)
 
     def login(self) -> dict:
         return (
