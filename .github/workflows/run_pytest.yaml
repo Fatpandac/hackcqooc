@@ -1,0 +1,27 @@
+name: Pytest Check
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: "Installs dependencies"
+        run: |
+          python -m pip install --upgrade pipenv wheel
+          pipenv install --deploy --dev
+      - name: "Run Pytest"
+        run: |
+          pipenv run pytest --cov=hackcqooc --cov-report=html --cov-fail-under=90 --cov-config ./tests/.coveragerc
+        env:
+          USERS: ${{ secrets.USERS }}
+          PASSWORD: ${{ secrets.PASSWORD }}
