@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 class Msg:
     def __init__(self):
-        self.__sussess = {
+        self.__susses = {
             "code": 200,
             "status": "ok",
         }
@@ -14,8 +14,8 @@ class Msg:
         if res is None:
             res = {}
         if code == 200:
-            res["code"] = self.__sussess["code"]
-            res["status"] = self.__sussess["status"]
+            res["code"] = self.__susses["code"]
+            res["status"] = self.__susses["status"]
             res["msg"] = msg
         else:
             res["code"] = self.__fail["code"]

@@ -35,9 +35,9 @@ class Request:
     def get_host(self) -> str:
         return self.__host
 
-    def do_get(
-        self, url: str, headers: dict = None, proxies: dict = None
-    ) -> requests.Response:
+    def __process_headers_and_proxies(
+        self, headers: dict = None, proxies: dict = None
+    ):
         self_headers = self.__headers.copy()
         if headers is not None:
             for key in headers:
@@ -46,7 +46,13 @@ class Request:
         if proxies is not None:
             for key in proxies:
                 self_proxies[key] = proxies[key]
-        return requests.get(url, headers=self_headers, proxies=self_proxies)
+        return self_headers, self_proxies
+
+    def do_get(
+        self, url: str, headers: dict = None, proxies: dict = None
+    ) -> requests.Response:
+        headers, proxies = self.__process_headers_and_proxies(headers, proxies)
+        return requests.get(url, headers=headers, proxies=proxies)
 
     def do_post(
         self,
@@ -55,14 +61,5 @@ class Request:
         headers: dict = None,
         proxies: dict = None,
     ) -> requests.Response:
-        self_headers = self.__headers.copy()
-        if headers is not None:
-            for key in headers:
-                self_headers[key] = headers[key]
-        self_proxies = self.__proxies.copy()
-        if proxies is not None:
-            for key in proxies:
-                self_proxies[key] = proxies[key]
-        return requests.post(
-            url, data=data, headers=self_headers, proxies=self_proxies
-        )
+        headers, proxies = self.__process_headers_and_proxies(headers, proxies)
+        return requests.post(url, data=data, headers=headers, proxies=proxies)

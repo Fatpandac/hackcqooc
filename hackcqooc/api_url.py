@@ -4,7 +4,8 @@ import time
 
 
 class ApiUrl:
-    def __get_ts(self) -> int:
+    @staticmethod
+    def __get_ts() -> int:
         return int(time.time() * 1000)
 
     def id_api(self, xsid: str) -> str:
@@ -22,17 +23,18 @@ class ApiUrl:
     def get_nonce_api(self):
         return f"http://www.cqooc.com/user/login?ts={self.__get_ts()}"
 
-    def login_api(self, username: str, hash: str, nonce: str, cn: str) -> str:
+    @staticmethod
+    def login_api(username: str, login_hash: str, nonce: str, cn: str) -> str:
         return (
             "http://www.cqooc.com/user/login"
-            + f"?username={username}&password={hash}"
+            + f"?username={username}&password={login_hash}"
             + f"&nonce={nonce}&cnonce={cn}"
         )
 
-    def course_api(self, id: int, limit: int) -> str:
+    def course_api(self, sid: str, limit: int) -> str:
         return (
             "http://www.cqooc.com/json/mcs?sortby=id&reverse=true&del=2"
-            + f"&courseType=2&ownerId={id}&limit={limit}"
+            + f"&courseType=2&ownerId={sid}&limit={limit}"
             + f"&ts={self.__get_ts()}"
         )
 
@@ -54,7 +56,7 @@ class ApiUrl:
             + f"&select=sectionId&username={username}&ts={self.__get_ts()}"
         )
 
-    def mcs_id_api(self, owner_id: int, course_id: str) -> str:
+    def mcs_id_api(self, owner_id: str, course_id: str) -> str:
         return (
             "http://www.cqooc.com/json/mcs"
             + f"?ownerId={owner_id}&courseId={course_id}"

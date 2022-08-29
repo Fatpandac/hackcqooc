@@ -4,7 +4,7 @@ import json
 import requests
 
 
-class Processer:
+class Processor:
     @staticmethod
     def process_course_data(course_res: requests.Response) -> dict:
         res_course_data = json.loads(course_res.text)

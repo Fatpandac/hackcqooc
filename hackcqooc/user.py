@@ -28,10 +28,10 @@ class User:
     def get_xsid(self) -> str:
         return self.__xsid
 
-    def set_id(self, sid: int) -> None:
+    def set_id(self, sid: str) -> None:
         self.__sid = sid
 
-    def get_id(self) -> int:
+    def get_id(self) -> str:
         return self.__sid
 
     def set_username(self, username: str) -> None:

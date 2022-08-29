@@ -3,7 +3,7 @@ from hackcqooc.request import Request
 from hackcqooc.user import User
 from hackcqooc.msg import Msg
 from hackcqooc.test import test
-from hackcqooc.processer import Processer
+from hackcqooc.processor import Processor
 from hackcqooc.api_url import ApiUrl
 
 import json
@@ -14,7 +14,7 @@ class Core:
     def __init__(
         self, username: str = "", pwd: str = "", cookie: str = None
     ) -> None:
-        self.__processer = Processer()
+        self.__processor = Processor()
         self.__request = Request()
         self.__api_url = ApiUrl()
         self.__user = User(username, pwd, cookie)
@@ -87,7 +87,7 @@ class Core:
                 "Host": "www.cqooc.com",
             },
         )
-        course_data = self.__processer.process_course_data(course_res)
+        course_data = self.__processor.process_course_data(course_res)
         self.__user.set_course_data(course_data.copy())
         return Msg().processing("获取课程成功", 200, self.__user.get_course_data())
 
@@ -121,7 +121,7 @@ class Core:
                 "host": "www.cqooc.com",
             },
         )
-        lessons_data = self.__processer.process_lessons_data(
+        lessons_data = self.__processor.process_lessons_data(
             self.__user.get_username(), lessons_res, lessons_status_res
         )
         self.__user.set_lessons_data(lessons_data.copy())
@@ -136,7 +136,7 @@ class Core:
                 self.__user.get_lessons_data()["data"],
             )
         )[0]
-        post_data = self.__processer.process_section_data(
+        post_data = self.__processor.process_section_data(
             section_data, self.__user.get_mcs_id()
         )
         skip_res = self.__request.do_post(

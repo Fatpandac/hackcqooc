@@ -10,13 +10,13 @@ def get_ts():
 
 
 xsid = "xsid"
-id = "id"
+sid = "123"
 username = "username"
-hash = "hash"
+login_hash = "hash"
 nonce = "nonce"
 cn = "cn"
 course_id = "course_id"
-owner_id = "owner_id"
+owner_id = "231"
 section_id = "section_id"
 start = 0
 limit = 200
@@ -46,18 +46,18 @@ def test_nonce_api():
 
 def test_login_api():
     api_url = ApiUrl()
-    assert api_url.login_api(username, hash, nonce, cn) == (
+    assert api_url.login_api(username, login_hash, nonce, cn) == (
         "http://www.cqooc.com/user/login"
-        + f"?username={username}&password={hash}"
+        + f"?username={username}&password={login_hash}"
         + f"&nonce={nonce}&cnonce={cn}"
     )
 
 
 def test_course_api():
     api_url = ApiUrl()
-    assert api_url.course_api(id, limit) == (
+    assert api_url.course_api(sid, limit) == (
         "http://www.cqooc.com/json/mcs?sortby=id&reverse=true&del=2"
-        + f"&courseType=2&ownerId={id}&limit={limit}"
+        + f"&courseType=2&ownerId={sid}&limit={limit}"
         + f"&ts={get_ts()}"
     )
 

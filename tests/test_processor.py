@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from hackcqooc.processer import Processer
+from hackcqooc.processor import Processor
 
 section_data = {
     "chapterId": "23129809",
@@ -12,8 +12,8 @@ mcs_id = "231298"
 
 
 def test_process_section_data():
-    processer = Processer()
-    post_data = processer.process_section_data(section_data, mcs_id)
+    processor = Processor()
+    post_data = processor.process_section_data(section_data, mcs_id)
     assert post_data["chapterId"] == "23129809"
     assert post_data["courseId"] == "2321421322"
     assert post_data["ownerId"] == 21345567
