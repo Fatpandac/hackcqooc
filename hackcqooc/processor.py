@@ -46,9 +46,7 @@ class Processor:
                 }
             )
         # add status
-        lesson_status = [
-            i["sectionId"] for i in lessons_status_res_data
-        ]
+        lesson_status = [i["sectionId"] for i in lessons_status_res_data]
         for lesson in lessons_data["data"]:
             lesson["status"] = 1 if lesson["sectionId"] in lesson_status else 0
         # sort by sectionId

@@ -68,7 +68,9 @@ class Core:
             if "=" in item:
                 key, value = item.split("=")
                 cookie_dict[key] = value
-        cookie = "; ".join([f"{key}={value}" for key, value in cookie_dict.items()])
+        cookie = "; ".join(
+            [f"{key}={value}" for key, value in cookie_dict.items()]
+        )
         self.__user.set_xsid(cookie_dict["xsid"])
         self.__request.set_headers("Cookie", cookie)
         try:
@@ -110,13 +112,18 @@ class Core:
         )
         mcs_id_data = mcs_id_res.json()
         self.__user.set_mcs_id(mcs_id_data["data"][0]["id"])
-        lessons_res, lessons_res_meta, lessons_status_res, count = [], None, [], 0
+        lessons_res, lessons_res_meta, lessons_status_res, count = (
+            [],
+            None,
+            [],
+            0,
+        )
         while True:
             temp = self.__request.do_get(
                 self.__api_url.lessons_api(course_id, start=count * 100 + 1),
                 headers={
                     "Referer": "http://www.cqooc.com/learn"
-                               + f"/mooc/structure?id={course_id}",
+                    + f"/mooc/structure?id={course_id}",
                     "host": "www.cqooc.com",
                 },
             ).json()
@@ -129,13 +136,14 @@ class Core:
         while True:
             temp = self.__request.do_get(
                 self.__api_url.lessons_status_api(
-                    course_id, self.__user.get_username(),
-                    start=count * 100 + 1
+                    course_id,
+                    self.__user.get_username(),
+                    start=count * 100 + 1,
                 ),
                 headers={
                     "Referer": (
-                            "http://www.cqooc.com/learn/mooc/progress"
-                            + f"?id={course_id}"
+                        "http://www.cqooc.com/learn/mooc/progress"
+                        + f"?id={course_id}"
                     ),
                     "host": "www.cqooc.com",
                 },
@@ -145,7 +153,10 @@ class Core:
             if len(temp["data"]) < 100:
                 break
         lessons_data = self.__processor.process_lessons_data(
-            self.__user.get_username(), lessons_res_meta, lessons_res, lessons_status_res
+            self.__user.get_username(),
+            lessons_res_meta,
+            lessons_res,
+            lessons_status_res,
         )
         self.__user.set_lessons_data(lessons_data.copy())
         return Msg().processing(
