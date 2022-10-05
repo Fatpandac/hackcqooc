@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import json
+from typing import List
+
 import requests
 
 
@@ -24,15 +26,12 @@ class Processor:
     @staticmethod
     def process_lessons_data(
         username: str,
-        lessons_res: requests.Response,
-        lessons_status_res: requests.Response,
+        lessons_res_meta: dict,
+        lessons_res_data: List,
+        lessons_status_res_data: List,
     ) -> dict:
-        lessons_res_data = json.loads(lessons_res.text)
-        lessons_status_res_data = json.loads(lessons_status_res.text)
-        lessons_data = dict()
-        lessons_data["meta"] = lessons_res_data["meta"]
-        lessons_data["data"] = []
-        for lesson in lessons_res_data["data"]:
+        lessons_data = {"meta": lessons_res_meta, "data": []}
+        for lesson in lessons_res_data:
             lessons_data["data"].append(
                 {
                     "title": lesson["title"],
@@ -48,13 +47,10 @@ class Processor:
             )
         # add status
         lesson_status = [
-            i["sectionId"] for i in lessons_status_res_data["data"]
+            i["sectionId"] for i in lessons_status_res_data
         ]
         for lesson in lessons_data["data"]:
-            if lesson["sectionId"] in lesson_status:
-                lesson["status"] = 1
-            else:
-                lesson["status"] = 0
+            lesson["status"] = 1 if lesson["sectionId"] in lesson_status else 0
         # sort by sectionId
         lessons_data["data"] = sorted(
             lessons_data["data"], key=lambda x: x["sectionId"]

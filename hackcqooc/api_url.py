@@ -39,7 +39,7 @@ class ApiUrl:
         )
 
     def lessons_api(
-        self, course_id: str, start: int = 0, limit: int = 200
+        self, course_id: str, start: int = 1, limit: int = 100
     ) -> str:
         return (
             "http://www.cqooc.com/json/mooc/lessons"
@@ -48,7 +48,7 @@ class ApiUrl:
         )
 
     def lessons_status_api(
-        self, course_id: str, username: str, start: int = 0, limit: int = 100
+        self, course_id: str, username: str, start: int = 1, limit: int = 100
     ) -> str:
         return (
             "http://www.cqooc.com/json/learnLogs"
