@@ -8,7 +8,7 @@ import io
 import os
 import sys
 from shutil import rmtree
-
+from hackcqooc import __version__
 from setuptools import find_packages, setup, Command
 
 # Package meta-data.
@@ -18,7 +18,7 @@ URL = "https://github.com/Fatpandac/hackcqooc"
 EMAIL = "i@Fatpandac.com"
 AUTHOR = "Fatpandac"
 REQUIRES_PYTHON = ">=3.0.0"
-VERSION = "0.0.4"
+VERSION = __version__
 
 # What packages are required for this module to be executed?
 REQUIRED = [
