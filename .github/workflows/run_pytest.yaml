@@ -2,6 +2,11 @@ name: Pytest Check
 
 on:
   push:
+    paths:
+      - 'hackcqooc'
+  pull_request:
+    paths:
+      - 'hackcqooc'
   workflow_dispatch:
 
 jobs:
