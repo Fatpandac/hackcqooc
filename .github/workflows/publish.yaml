@@ -20,7 +20,8 @@ jobs:
       - name: "Installs dependencies"
         run: |
           python3 -m pip install --upgrade pip
-          python3 -m pip install setuptools wheel twine
+          python3 -m pip install setuptools wheel twine pipenv
+          pip install -r requirements.txt
       - name: "Builds and uploads to PyPI"
         run: |
           python3 setup.py sdist bdist_wheel
