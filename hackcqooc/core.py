@@ -61,7 +61,17 @@ class Core:
             return Msg().processing("登录失败，可能需要官网登录后重试", 400, data)
 
     def __login_by_cookie(self) -> dict:
-        self.__request.set_headers("Cookie", self.__user.get_cookie())
+        cookie = self.__user.get_cookie()
+        # parse cookie to dict
+        cookie_dict = dict(
+            item.split("=") if "=" in item else ""
+            for item in cookie.split(";")
+        )
+        cookie = "; ".join(
+            [f"{key}={value}" for key, value in cookie_dict.items()]
+        )
+        self.__user.set_xsid(cookie_dict["xsid"])
+        self.__request.set_headers("Cookie", cookie)
         try:
             self.__process_user_info()
         except KeyError:
@@ -101,28 +111,51 @@ class Core:
         )
         mcs_id_data = mcs_id_res.json()
         self.__user.set_mcs_id(mcs_id_data["data"][0]["id"])
-        lessons_res = self.__request.do_get(
-            self.__api_url.lessons_api(course_id),
-            headers={
-                "Referer": "http://www.cqooc.com/learn"
-                + f"/mooc/structure?id={course_id}",
-                "host": "www.cqooc.com",
-            },
+        lessons_res, lessons_res_meta, lessons_status_res, count = (
+            [],
+            None,
+            [],
+            0,
         )
-        lessons_status_res = self.__request.do_get(
-            self.__api_url.lessons_status_api(
-                course_id, self.__user.get_username()
-            ),
-            headers={
-                "Referer": (
-                    "http://www.cqooc.com/learn/mooc/progress"
-                    + f"?id={course_id}"
+        while True:
+            temp = self.__request.do_get(
+                self.__api_url.lessons_api(course_id, start=count * 100 + 1),
+                headers={
+                    "Referer": "http://www.cqooc.com/learn"
+                    + f"/mooc/structure?id={course_id}",
+                    "host": "www.cqooc.com",
+                },
+            ).json()
+            lessons_res_meta = temp["meta"]
+            lessons_res.extend(temp["data"])
+            count += 1
+            if len(temp["data"]) < 100:
+                break
+        count = 0
+        while True:
+            temp = self.__request.do_get(
+                self.__api_url.lessons_status_api(
+                    course_id,
+                    self.__user.get_username(),
+                    start=count * 100 + 1,
                 ),
-                "host": "www.cqooc.com",
-            },
-        )
+                headers={
+                    "Referer": (
+                        "http://www.cqooc.com/learn/mooc/progress"
+                        + f"?id={course_id}"
+                    ),
+                    "host": "www.cqooc.com",
+                },
+            ).json()
+            lessons_status_res.extend(temp["data"])
+            count += 1
+            if len(temp["data"]) < 100:
+                break
         lessons_data = self.__processor.process_lessons_data(
-            self.__user.get_username(), lessons_res, lessons_status_res
+            self.__user.get_username(),
+            lessons_res_meta,
+            lessons_res,
+            lessons_status_res,
         )
         self.__user.set_lessons_data(lessons_data.copy())
         return Msg().processing(
