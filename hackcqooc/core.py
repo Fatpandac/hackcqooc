@@ -63,11 +63,10 @@ class Core:
     def __login_by_cookie(self) -> dict:
         cookie = self.__user.get_cookie()
         # parse cookie to dict
-        cookie_dict = {}
-        for item in cookie.split(";"):
-            if "=" in item:
-                key, value = item.split("=")
-                cookie_dict[key] = value
+        cookie_dict = dict(
+            item.split("=") if "=" in item else ""
+            for item in cookie.split(";")
+        )
         cookie = "; ".join(
             [f"{key}={value}" for key, value in cookie_dict.items()]
         )
