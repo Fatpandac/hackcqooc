@@ -2,13 +2,13 @@
 import requests
 import logging
 
-logging.basicConfig(
-    level=logging.INFO,
-    filename="hackcqooc.log",
-    filemode="w",
-    format="%(levelname)s:%(asctime)s:%(message)s",
-    datefmt="%Y-%d-%m %H:%M:%S",
-)
+# logging.basicConfig(
+#     level=logging.INFO,
+#     filename="hackcqooc.log",
+#     filemode="w",
+#     format="%(levelname)s:%(asctime)s:%(message)s",
+#     datefmt="%Y-%d-%m %H:%M:%S",
+# )
 
 
 class Request:
