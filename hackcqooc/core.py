@@ -7,12 +7,14 @@ from hackcqooc.processor import Processor
 from hackcqooc.api_url import ApiUrl
 
 import json
+import logging
 
 
 class Core:
     def __init__(
         self, username: str = "", pwd: str = "", cookie: str = None
     ) -> None:
+        logging.info("🚀 Init Core")
         self.__processor = Processor()
         self.__request = Request()
         self.__api_url = ApiUrl()

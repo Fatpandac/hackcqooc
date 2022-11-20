@@ -1,5 +1,14 @@
 # -*- coding: utf-8 -*-
 import requests
+import logging
+
+logging.basicConfig(
+    level=logging.INFO,
+    filename="hackcqooc.log",
+    filemode="w",
+    format="%(levelname)s:%(asctime)s:%(message)s",
+    datefmt="%Y-%d-%m %H:%M:%S",
+)
 
 
 class Request:
@@ -46,7 +55,10 @@ class Request:
         self, url: str, headers: dict = None, proxies: dict = None
     ) -> requests.Response:
         headers, proxies = self.__process_headers_and_proxies(headers, proxies)
-        return requests.get(url, headers=headers, proxies=proxies)
+        res = requests.get(url, headers=headers, proxies=proxies)
+        logging.info(f"{url} GET")
+        logging.info(f"{res.text}")
+        return res
 
     def do_post(
         self,
@@ -56,4 +68,7 @@ class Request:
         proxies: dict = None,
     ) -> requests.Response:
         headers, proxies = self.__process_headers_and_proxies(headers, proxies)
-        return requests.post(url, data=data, headers=headers, proxies=proxies)
+        res = requests.post(url, data=data, headers=headers, proxies=proxies)
+        logging.info(f"{url} POST")
+        logging.info(f"{res.text}")
+        return res
