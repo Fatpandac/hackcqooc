@@ -15,8 +15,6 @@ proxies = {
 
 proxiesURI = "http://127.0.0.1:8889"
 
-host = "http://www.cqooc.com"
-
 
 def test_get_ua():
     request = Request()
@@ -46,11 +44,6 @@ def test_set_proxies():
     request.set_proxies("http", proxiesURI)
     assert request.get_proxies()["http"] == proxiesURI
     request.set_proxies("http", "")
-
-
-def test_get_host():
-    request = Request()
-    assert request.get_host() == host
 
 
 def test_do_get():

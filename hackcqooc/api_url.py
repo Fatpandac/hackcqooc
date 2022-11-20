@@ -4,36 +4,39 @@ import time
 
 
 class ApiUrl:
+    __host = "https://www.cqooc.com"
+
     @staticmethod
     def __get_ts() -> int:
         return int(time.time() * 1000)
 
     def id_api(self, xsid: str) -> str:
         return (
-            "http://www.cqooc.com/user/session"
+            f"{self.__host}/user/session"
             + f"?xsid={xsid}&ts={self.__get_ts()}"
         )
 
     def info_api(self) -> str:
         return (
-            "http://www.cqooc.com/account/session/api/profile/get"
+            f"{self.__host}/account/session/api/profile/get"
             + f"?ts={self.__get_ts()}"
         )
 
     def get_nonce_api(self):
-        return f"http://www.cqooc.com/user/login?ts={self.__get_ts()}"
+        return f"{self.__host}/user/login?ts={self.__get_ts()}"
 
-    @staticmethod
-    def login_api(username: str, login_hash: str, nonce: str, cn: str) -> str:
+    def login_api(
+        self, username: str, login_hash: str, nonce: str, cn: str
+    ) -> str:
         return (
-            "http://www.cqooc.com/user/login"
+            f"{self.__host}/user/login"
             + f"?username={username}&password={login_hash}"
             + f"&nonce={nonce}&cnonce={cn}"
         )
 
     def course_api(self, sid: str, limit: int) -> str:
         return (
-            "http://www.cqooc.com/json/mcs?sortby=id&reverse=true&del=2"
+            f"{self.__host}/json/mcs?sortby=id&reverse=true&del=2"
             + f"&courseType=2&ownerId={sid}&limit={limit}"
             + f"&ts={self.__get_ts()}"
         )
@@ -42,7 +45,7 @@ class ApiUrl:
         self, course_id: str, start: int = 1, limit: int = 100
     ) -> str:
         return (
-            "http://www.cqooc.com/json/mooc/lessons"
+            f"{self.__host}/json/mooc/lessons"
             + f"?limit={limit}&start={start}&sortby=selfId&reverse=false"
             + f"&courseId={course_id}&ts={self.__get_ts()}"
         )
@@ -51,21 +54,21 @@ class ApiUrl:
         self, course_id: str, username: str, start: int = 1, limit: int = 100
     ) -> str:
         return (
-            "http://www.cqooc.com/json/learnLogs"
+            f"{self.__host}/json/learnLogs"
             + f"?limit={limit}&start={start}&courseId={course_id}"
             + f"&select=sectionId&username={username}&ts={self.__get_ts()}"
         )
 
     def mcs_id_api(self, owner_id: str, course_id: str) -> str:
         return (
-            "http://www.cqooc.com/json/mcs"
+            f"{self.__host}/json/mcs"
             + f"?ownerId={owner_id}&courseId={course_id}"
             + f"&ts={self.__get_ts()}"
         )
 
     def learn_log_api(self, section_id: str, username: str) -> str:
         return (
-            "http://www.cqooc.com/json/learnLogs"
+            f"{self.__host}/json/learnLogs"
             + f"?sectionId={section_id}&username={username}"
             + f"&ts={self.__get_ts()}"
         )
@@ -74,7 +77,7 @@ class ApiUrl:
         self, course_id: str, start: int = 0, limit: int = 200
     ) -> str:
         return (
-            "http://www.cqooc.com/json/exam/papers"
+            f"{self.__host}/json/exam/papers"
             + f"?limit={limit}&start={start}&courseId={course_id}"
             f"&ts={self.__get_ts()}"
         )
@@ -83,7 +86,7 @@ class ApiUrl:
         self, course_id: str, start: int = 0, limit: int = 200
     ) -> str:
         return (
-            "http://www.cqooc.com/json/exams"
+            f"{self.__host}/json/exams"
             + f"?limit={limit}&start={start}&courseId={course_id}"
             f"&ts={self.__get_ts()}"
         )
@@ -92,7 +95,7 @@ class ApiUrl:
         self, course_id: str, start: int = 0, limit: int = 200
     ) -> str:
         return (
-            "http://www.cqooc.com/json/tasks"
+            f"{self.__host}/json/tasks"
             + f"?limit={limit}&start={start}&courseId={course_id}"
             + f"&ts={self.__get_ts()}"
         )
@@ -101,11 +104,10 @@ class ApiUrl:
         self, course_id: str, start: int = 0, limit: int = 200
     ) -> str:
         return (
-            "http://www.cqooc.com/json/chapters"
+            f"{self.__host}/json/chapters"
             + f"?limit={limit}&start={start}&courseId={course_id}"
             + f"&ts={self.__get_ts()}"
         )
 
-    @staticmethod
-    def skip_section_api() -> str:
-        return "http://www.cqooc.com/learnLog/api/add"
+    def skip_section_api(self) -> str:
+        return f"{self.__host}/learnLog/api/add"
