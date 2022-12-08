@@ -30,6 +30,7 @@ pip3 install hackcqooc
 
 ## 有谁在使用
 
-|                      仓库                                    |             简介               |
+|                      仓库                                 |             简介               |
 |:--------------------------------------------------------:|:------------------------------:|
-| [fuck_cqooc](https://github.com/Fatpandac/fuck_cqooc)    | 一个重庆高校在线开放课程平台刷课工具 |
+| [fuckcqooc](https://github.com/Fatpandac/fuck_cqooc)     | 一个重庆高校在线开放课程平台刷课工具 |
+| [xygxpt](https://github.com/Mrkk1/xygxpt)                | 小鱼高校平台助手                  |
