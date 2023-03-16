@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 class User:
-
     __xsid = None
     __sid = None
     __username = None
