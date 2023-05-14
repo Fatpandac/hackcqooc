@@ -1,3 +1,26 @@
+[project]
+name = "hackcqooc"
+version = "0.0.8"
+description = "一个重庆高校在线开放课程平台自动化工具包。"
+authors = [
+    { name = "Fatpandac", email = "i@fatpandac.com" }
+]
+dependencies = ["requests~=2.30.0", "js2py~=0.74"]
+readme = "README.md"
+requires-python = ">= 3.8"
+license = { text = "MIT" }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = ["pre-commit~=3.3.1", "pytest~=7.3.1", "pytest-cov~=4.0.0", "pytest-sugar~=0.9.7", "twine~=4.0.2"]
+
+[tool.rye.scripts]
+test = "pytest --cov=hackcqooc --cov-report=html --cov-fail-under=90 --cov-config ./tests/.coveragerc"
+
 [tool.black]
 line-length = 79
 include = '\.pyi?$'
