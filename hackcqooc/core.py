@@ -60,7 +60,9 @@ class Core:
             self.__process_user_info()
             return Msg().processing("登录成功", 200, data)
         else:
-            return Msg().processing("登录失败，可能需要官网登录后重试", 400, data)
+           
+            # return Msg().processing("登录失败，可能需要官网登录后重试", 400, data)
+            return  Msg().processing(data['msg'], 400, data)
 
     def __login_by_cookie(self) -> dict:
         cookie = self.__user.get_cookie()
