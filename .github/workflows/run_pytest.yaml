@@ -14,19 +14,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - uses: actions/setup-python@v2
-        with:
-          python-version: 3.8
+      - name: Install Rye
+        uses: sbarrios93/rye-rust-action@v0.1.0
+        id: rye-installer
 
       - name: "Installs dependencies"
         run: |
-          python -m pip install --upgrade pipenv wheel
-          pipenv install --deploy --dev
+          rye sync
       - name: "Run Pytest"
         run: |
-          pipenv run pytest --cov=hackcqooc --cov-report=html --cov-fail-under=90 --cov-config ./tests/.coveragerc
+          rye run test
         env:
           USERS: ${{ secrets.USERS }}
           PASSWORD: ${{ secrets.PASSWORD }}

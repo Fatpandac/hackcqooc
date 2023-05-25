@@ -1,6 +1,6 @@
 [project]
 name = "hackcqooc"
-version = "0.0.8"
+version = "0.0.9"
 description = "一个重庆高校在线开放课程平台自动化工具包。"
 authors = [
     { name = "Fatpandac", email = "i@fatpandac.com" }
@@ -20,6 +20,7 @@ dev-dependencies = ["pre-commit~=3.3.1", "pytest~=7.3.1", "pytest-cov~=4.0.0", "
 
 [tool.rye.scripts]
 test = "pytest --cov=hackcqooc --cov-report=html --cov-fail-under=90 --cov-config ./tests/.coveragerc"
+publish = "twine upload dist/*"
 
 [tool.black]
 line-length = 79

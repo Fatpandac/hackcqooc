@@ -11,23 +11,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - uses: actions/setup-python@v2
-        with:
-          python-version: 3.8
-
-      - name: "Installing Rye"
-        run: |
-          curl -sSf https://rye-up.com/get | bash
+      - name: Install Rye
+        uses: sbarrios93/rye-rust-action@v0.1.0
+        id: rye-installer
 
       - name: "Installs dependencies"
         run: |
           rye sync
-      - name: "Builds and uploads to PyPI"
+
+      - name: "Build"
         run: |
           rye build
-          rye publish
+
+      - name: "Upload"
+        run: |
+          rye run publish
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PIPY }}
