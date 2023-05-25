@@ -27,7 +27,9 @@ class Core:
         id_data = id_res.json()
         self.__user.set_id(id_data["id"])
 
-        info_res = self.__request.do_get(self.__api_url.info_api())
+        info_res = self.__request.do_get(
+            self.__api_url.info_api(), {"Referer": "https://www.cqooc.com/"}
+        )
         info_data = info_res.json()
         self.__user.set_name(info_data["name"])
 
