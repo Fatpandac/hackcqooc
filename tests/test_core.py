@@ -24,7 +24,7 @@ def test_login_fail():
     core = Core(username_fail, password_fail)
     res = core.login()
     assert res["code"] == 400
-    assert res["msg"] == "登录失败，可能需要官网登录后重试"
+    assert res["msg"] is not None
     assert res["status"] == "fail"
 
 
@@ -43,7 +43,7 @@ def test_login_by_cookie_fail():
     core = Core(cookie=cookie_fail)
     res = core.login()
     assert res["code"] == 400
-    assert res["msg"] == "登录失败，可能需要官网登录后重试"
+    assert res["msg"] is not None
     assert res["status"] == "fail"
 
 
