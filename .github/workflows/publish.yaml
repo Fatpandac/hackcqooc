@@ -19,13 +19,12 @@ jobs:
 
       - name: "Installs dependencies"
         run: |
-          python3 -m pip install --upgrade pip
-          python3 -m pip install setuptools wheel twine pipenv
-          pip install -r requirements.txt
+          python3 -m pip install --upgrade rye
+          rye sync
       - name: "Builds and uploads to PyPI"
         run: |
-          python3 setup.py sdist bdist_wheel
-          python3 -m twine upload dist/*
+          rye build
+          rye publish
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PIPY }}
