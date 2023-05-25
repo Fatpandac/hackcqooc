@@ -17,15 +17,17 @@ jobs:
         with:
           python-version: 3.8
 
+      - name: "Installing Rye"
+        run: |
+          curl -sSf https://rye-up.com/get | bash
+
       - name: "Installs dependencies"
         run: |
-          python3 -m pip install --upgrade pip
-          python3 -m pip install setuptools wheel twine pipenv
-          pip install -r requirements.txt
+          rye sync
       - name: "Builds and uploads to PyPI"
         run: |
-          python3 setup.py sdist bdist_wheel
-          python3 -m twine upload dist/*
+          rye build
+          rye publish
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PIPY }}
