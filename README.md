@@ -34,3 +34,4 @@ pip3 install hackcqooc
 |:--------------------------------------------------------:|:------------------------------:|
 | [fuckcqooc](https://github.com/Fatpandac/fuck_cqooc)     | 一个重庆高校在线开放课程平台刷课工具 |
 | [xygxpt](https://github.com/Mrkk1/xygxpt)                | 小鱼高校平台助手                  |
+| [cqooc_time](https://github.com/omg-xtao/cqooc_time)     | 重庆高校在线开放课程平台导出测验时间到 excel |
