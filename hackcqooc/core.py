@@ -32,6 +32,10 @@ class Core:
         )
         info_data = info_res.json()
         self.__user.set_name(info_data["name"])
+        # 如果用户使用手机号登录
+        # 后续请求 API 需要网站自定义的 username
+        # 所以在这里重写 username
+        self.__user.set_username(info_data["username"])
 
     def __login_by_pwd(self) -> dict:
         api = self.__api_url.get_nonce_api()
