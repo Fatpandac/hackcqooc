@@ -28,6 +28,12 @@ pip3 install hackcqooc
 9. 📖 获取作业列表 ([@omg-xtao](https://github.com/omg-xtao))
 10. 🔢 获取章节列表 ([@omg-xtao](https://github.com/omg-xtao))
 
+## 参与开发
+
+我们欢迎任何类型的 PR 以及 issue。🎉
+
+本项目使用 Rye 构建环境，使用 `rye`，先[安装 rye](https://rye-up.com/guide/installation/)，之后运行命令 `rye sync`，再运行 `rye run sample` 即可。
+
 ## 有谁在使用
 
 |                      仓库                                 |             简介               |

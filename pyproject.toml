@@ -21,6 +21,7 @@ dev-dependencies = ["pre-commit~=3.3.1", "pytest~=7.3.1", "pytest-cov~=4.0.0", "
 [tool.rye.scripts]
 test = "pytest --cov=hackcqooc --cov-report=html --cov-fail-under=90 --cov-config ./tests/.coveragerc"
 publish = "twine upload dist/*"
+sample = "python ./sample.py"
 
 [tool.black]
 line-length = 79
