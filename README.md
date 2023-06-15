@@ -1,6 +1,6 @@
 <h1 align="center">hackcqooc</h1>
 
-![GitHub](https://img.shields.io/github/license/Fatpandac/hackcqooc) ![PyPI - Downloads](https://img.shields.io/pypi/dm/hackcqooc) ![PyPI](https://img.shields.io/pypi/v/hackcqooc) [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/Fatpandac/hackcqooc/main.svg)](https://results.pre-commit.ci/latest/github/Fatpandac/hackcqooc/main)
+![GitHub](https://img.shields.io/github/license/Fatpandac/hackcqooc) ![PyPI - Downloads](https://img.shields.io/pypi/dm/hackcqooc) ![PyPI](https://img.shields.io/pypi/v/hackcqooc) [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/Fatpandac/hackcqooc/main.svg)](https://results.pre-commit.ci/latest/github/Fatpandac/hackcqooc/main) [![Discord](https://img.shields.io/discord/1100683975321722980?label=Discord)](https://discord.gg/KMQBfKHzRm)
 
 一个重庆高校在线开放课程平台自动化工具包。
 
