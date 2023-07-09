@@ -28,7 +28,8 @@ class Core:
         self.__user.set_id(id_data["id"])
 
         info_res = self.__request.do_get(
-            self.__api_url.info_api(), {"Referer": "https://www.cqooc.com/"}
+            self.__api_url.info_api(),
+            {"Referer": "https://www.cqooc.com/"},
         )
         info_data = info_res.json()
         self.__user.set_name(info_data["name"])
@@ -52,7 +53,10 @@ class Core:
         )
         login_res = self.__request.do_post(
             self.__api_url.login_api(
-                self.__user.get_username(), login_hash, data["nonce"], cn
+                self.__user.get_username(),
+                login_hash,
+                data["nonce"],
+                cn,
             ),
             headers={
                 "Referer": "http://www.cqooc.com/login",
@@ -66,7 +70,6 @@ class Core:
             self.__process_user_info()
             return Msg().processing("登录成功", 200, data)
         else:
-            # return Msg().processing("登录失败，可能需要官网登录后重试", 400, data)
             return Msg().processing(data["msg"], 400, data)
 
     def __login_by_cookie(self) -> dict:
@@ -108,7 +111,9 @@ class Core:
         )
         course_data = self.__processor.process_course_data(course_res)
         self.__user.set_course_data(course_data.copy())
-        return Msg().processing("获取课程成功", 200, self.__user.get_course_data())
+        return Msg().processing(
+            "获取课程成功", 200, self.__user.get_course_data()
+        )  # noqa: E501
 
     def get_course_lessons(self, course_id: str) -> dict:
         mcs_id_res = self.__request.do_get(
@@ -229,7 +234,9 @@ class Core:
             },
         )
         self.__user.set_exams_data(exams.json().copy())
-        return Msg().processing("获取考试列表成功", 200, self.__user.get_exams_data())
+        return Msg().processing(
+            "获取考试列表成功", 200, self.__user.get_exams_data()
+        )  # noqa: E501
 
     def get_tasks_info(
         self, course_id: str, start: int = 0, limit: int = 200
@@ -242,7 +249,9 @@ class Core:
             },
         )
         self.__user.set_tasks_data(tasks.json().copy())
-        return Msg().processing("获取作业列表成功", 200, self.__user.get_tasks_data())
+        return Msg().processing(
+            "获取作业列表成功", 200, self.__user.get_tasks_data()
+        )  # noqa: E501
 
     def get_chapters_info(
         self, course_id: str, start: int = 0, limit: int = 200
