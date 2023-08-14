@@ -1,6 +1,6 @@
 [project]
 name = "hackcqooc"
-version = "0.0.11"
+version = "0.0.12"
 description = "一个重庆高校在线开放课程平台自动化工具包。"
 authors = [
     { name = "Fatpandac", email = "i@fatpandac.com" }
