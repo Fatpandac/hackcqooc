@@ -29,7 +29,7 @@ class ApiUrl:
         self, username: str, login_hash: str, nonce: str, cn: str
     ) -> str:
         return (
-            f"{self.__host}/user/login"
+            f"{self.__host}/account/login/log/api/do"
             + f"?username={username}&password={login_hash}"
             + f"&nonce={nonce}&cnonce={cn}"
         )
