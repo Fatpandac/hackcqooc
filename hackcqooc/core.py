@@ -58,8 +58,12 @@ class Core:
                 data["nonce"],
                 cn,
             ),
+            json={
+                "signType": "1",
+                "username": self.__user.get_username(),
+            },
             headers={
-                "Referer": "http://www.cqooc.com/login",
+                "Referer": "https://www.cqooc.com/login",
             },
         )
         data = login_res.json()
