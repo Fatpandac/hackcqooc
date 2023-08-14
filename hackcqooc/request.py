@@ -69,7 +69,9 @@ class Request:
         proxies: dict = None,
     ) -> requests.Response:
         headers, proxies = self.__process_headers_and_proxies(headers, proxies)
-        res = requests.post(url, data=data, json=json, headers=headers, proxies=proxies)
+        res = requests.post(
+            url, data=data, json=json, headers=headers, proxies=proxies
+        )
         logging.info(f"{url} POST")
         logging.info(f"{res.text}")
         return res
