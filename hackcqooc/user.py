@@ -13,7 +13,7 @@ class User:
     __chapters_data = None
     __mcs_id = None
     __cookie = None
-    __captchaToken =None
+    __captchaToken = None
 
     def __init__(
         self, username: str = "", pwd: str = "", cookie: str = None

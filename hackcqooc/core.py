@@ -12,7 +12,12 @@ import logging
 
 class Core:
     def __init__(
-        self, username: str = "", pwd: str = "", cookie: str = None,captcha: str = None, captcha_key:str = None
+        self,
+        username: str = "",
+        pwd: str = "",
+        cookie: str = None,
+        captcha: str = None,
+        captcha_key: str = None,
     ) -> None:
         logging.info("Init Core")
         self.__processor = Processor()
@@ -21,6 +26,7 @@ class Core:
         self.__user = User(username, pwd, cookie)
         self.__captcha = captcha
         self.__captcha_key = captcha_key
+
     def __process_user_info(self) -> None:
         id_res = self.__request.do_get(
             self.__api_url.id_api(self.__user.get_xsid())
@@ -67,15 +73,22 @@ class Core:
             self.__process_user_info()
             return Msg().processing("登录成功", 200, data)
         else:
-
             # 获取验证码
             captcha_api = self.__api_url.get_captcha_api()
-            captcha_res = self.__request.do_get(captcha_api,{ "Referer": "http://www.cqooc.com/login",})
+            captcha_res = self.__request.do_get(
+                captcha_api,
+                {
+                    "Referer": "http://www.cqooc.com/login",
+                },
+            )
             cdata = captcha_res.json()
             # return Msg().processing("登录失败，可能需要官网登录后重试", 400, data)
-       
-            return Msg().processing(data["msg"], 400, cdata=cdata["img"],key=cdata["key"])
-    def __login_by_pwd2(self,captchaToken) -> dict:
+
+            return Msg().processing(
+                data["msg"], 400, cdata=cdata["img"], key=cdata["key"]
+            )
+
+    def __login_by_pwd2(self, captchaToken) -> dict:
         print("pw2")
         print(captchaToken)
         api = self.__api_url.get_nonce_api()
@@ -93,10 +106,14 @@ class Core:
 
         againlogin_post_data = self.__processor.process_againlogin_data(
             "1", self.__user.get_username()
-        )           
+        )
         login_res = self.__request.do_post(
             self.__api_url.login_api2(
-                self.__user.get_username(), login_hash, data["nonce"], cn,captchaToken=captchaToken
+                self.__user.get_username(),
+                login_hash,
+                data["nonce"],
+                cn,
+                captchaToken=captchaToken,
             ),
             data=json.dumps(againlogin_post_data),
             headers={
@@ -112,14 +129,21 @@ class Core:
             self.__process_user_info()
             return Msg().processing("登录成功", 200, data)
         else:
-
             # 获取验证码
             captcha_api = self.__api_url.get_captcha_api()
-            captcha_res = self.__request.do_get(captcha_api,{ "Referer": "http://www.cqooc.com/login",})
+            captcha_res = self.__request.do_get(
+                captcha_api,
+                {
+                    "Referer": "http://www.cqooc.com/login",
+                },
+            )
             cdata = captcha_res.json()
             # return Msg().processing("登录失败，可能需要官网登录后重试", 400, data)
-       
-            return Msg().processing(data["msg"], 400, cdata=cdata["img"],key=cdata["key"])
+
+            return Msg().processing(
+                data["msg"], 400, cdata=cdata["img"], key=cdata["key"]
+            )
+
     def __login_by_cookie(self) -> dict:
         cookie = self.__user.get_cookie()
         # parse cookie to dict
@@ -146,12 +170,10 @@ class Core:
             else self.__login_by_cookie()
         )
 
-
-    def get_captchaToken(self)->dict:   
-
+    def get_captchaToken(self) -> dict:
         captcha_post_data = self.__processor.process_captcha_data(
             self.__captcha, self.__captcha_key
-        )   
+        )
         get_captchaToken_url = self.__api_url.get_captchaToken_api()
         get_captchaToken_res = self.__request.do_post(
             get_captchaToken_url,
@@ -159,25 +181,31 @@ class Core:
             headers={
                 "Referer": "http://www.cqooc.com/login",
             },
-        ).json()      
+        ).json()
         print(get_captchaToken_res)
         if str(get_captchaToken_res["code"]) == "0":
-            loginagainres = self.__login_by_pwd2(captchaToken=get_captchaToken_res["captchaToken"])
+            loginagainres = self.__login_by_pwd2(
+                captchaToken=get_captchaToken_res["captchaToken"]
+            )
 
             return loginagainres
         elif str(get_captchaToken_res["code"]) == "1":
             # 验证码出错重新获取验证码
             captcha_api = self.__api_url.get_captcha_api()
-            captcha_res = self.__request.do_get(captcha_api,{ "Referer": "http://www.cqooc.com/login",})
+            captcha_res = self.__request.do_get(
+                captcha_api,
+                {
+                    "Referer": "http://www.cqooc.com/login",
+                },
+            )
             cdata = captcha_res.json()
             # return Msg().processing("登录失败，可能需要官网登录后重试", 400, data)
-       
-            return Msg().processing( code= "1", msg='验证码出错',cdata=cdata["img"],key=cdata["key"])            
-            return {
-                'code':'1',
-                'msg':'invalid captcha'
-            }
-   
+
+            return Msg().processing(
+                code="1", msg="验证码出错", cdata=cdata["img"], key=cdata["key"]
+            )
+            return {"code": "1", "msg": "invalid captcha"}
+
     def get_user_info(self) -> dict:
         return Msg().processing("登录成功", 200, self.__user.get_info())
 

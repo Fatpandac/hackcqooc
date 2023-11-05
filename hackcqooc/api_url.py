@@ -21,54 +21,65 @@ class ApiUrl:
             f"{self.__host}/account/session/api/profile/get"
             + f"?ts={self.__get_ts()}"
         )
-    
 
-    def get_captcha_api(self)-> str:
-           return (
-            f"{self.__host}/captcha/c"
-            + f"?ts={self.__get_ts()}"
-        )
-    def get_captchaToken_api(self)-> str:
-           return (
-            f"{self.__host}/captcha/c"
-        )
+    def get_captcha_api(self) -> str:
+        return f"{self.__host}/captcha/c" + f"?ts={self.__get_ts()}"
+
+    def get_captchaToken_api(self) -> str:
+        return f"{self.__host}/captcha/c"
+
     def again_login_api(
-        self, username: str, login_hash: str, nonce: str, cn: str,captchaToken:str
+        self,
+        username: str,
+        login_hash: str,
+        nonce: str,
+        cn: str,
+        captchaToken: str,
     ) -> str:
         return (
             f"{self.__host}/account/login/log/api/do"
             + f"?username={username}&password={login_hash}"
             + f"&nonce={nonce}&cnonce={cn}"
             + f"&captchaToken={captchaToken}"
-
-        )       
-    
+        )
 
     def get_nonce_api(self):
         return f"{self.__host}/user/login?ts={self.__get_ts()}"
 
     def login_api(
-        self, username: str, login_hash: str, nonce: str, cn: str,
+        self,
+        username: str,
+        login_hash: str,
+        nonce: str,
+        cn: str,
     ) -> str:
         return (
             f"{self.__host}/user/login"
             + f"?username={username}&password={login_hash}"
             + f"&nonce={nonce}&cnonce={cn}"
         )
-           
+
     def login_api2(
-        self, username: str, login_hash: str, nonce: str, cn: str,captchaToken:str 
+        self,
+        username: str,
+        login_hash: str,
+        nonce: str,
+        cn: str,
+        captchaToken: str,
     ) -> str:
-        print(f"{self.__host}/account/login/log/api/do"
+        print(
+            f"{self.__host}/account/login/log/api/do"
             + f"?username={username}&password={login_hash}"
             + f"&nonce={nonce}&cnonce={cn}"
-            + f"&captchaToken={captchaToken}")
+            + f"&captchaToken={captchaToken}"
+        )
         return (
             f"{self.__host}/account/login/log/api/do"
             + f"?username={username}&password={login_hash}"
             + f"&nonce={nonce}&cnonce={cn}"
             + f"&captchaToken={captchaToken}"
-        )  
+        )
+
     def course_api(self, sid: str, limit: int) -> str:
         return (
             f"{self.__host}/json/mcs?sortby=id&reverse=true&del=2"

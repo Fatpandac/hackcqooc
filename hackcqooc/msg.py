@@ -10,7 +10,14 @@ class Msg:
             "status": "fail",
         }
 
-    def processing(self, msg: str, code: int, res: dict = None,cdata:str = None,key:str = None) -> dict:
+    def processing(
+        self,
+        msg: str,
+        code: int,
+        res: dict = None,
+        cdata: str = None,
+        key: str = None,
+    ) -> dict:
         if res is None:
             res = {}
         if code == 200:
