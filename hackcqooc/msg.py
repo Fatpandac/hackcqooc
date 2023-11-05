@@ -10,7 +10,7 @@ class Msg:
             "status": "fail",
         }
 
-    def processing(self, msg: str, code: int, res: dict = None) -> dict:
+    def processing(self, msg: str, code: int, res: dict = None,cdata:str = None,key:str = None) -> dict:
         if res is None:
             res = {}
         if code == 200:
@@ -22,5 +22,7 @@ class Msg:
             res["status"] = self.__fail["status"]
             res["msg"] = msg
             res["data"] = None
+            res["cdata"] = cdata
+            res["key"] = key
 
         return res

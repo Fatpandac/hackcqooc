@@ -12,14 +12,15 @@ import logging
 
 class Core:
     def __init__(
-        self, username: str = "", pwd: str = "", cookie: str = None
+        self, username: str = "", pwd: str = "", cookie: str = None,captcha: str = None, captcha_key:str = None
     ) -> None:
         logging.info("Init Core")
         self.__processor = Processor()
         self.__request = Request()
         self.__api_url = ApiUrl()
         self.__user = User(username, pwd, cookie)
-
+        self.__captcha = captcha
+        self.__captcha_key = captcha_key
     def __process_user_info(self) -> None:
         id_res = self.__request.do_get(
             self.__api_url.id_api(self.__user.get_xsid())
@@ -28,8 +29,7 @@ class Core:
         self.__user.set_id(id_data["id"])
 
         info_res = self.__request.do_get(
-            self.__api_url.info_api(),
-            {"Referer": "https://www.cqooc.com/"},
+            self.__api_url.info_api(), {"Referer": "https://www.cqooc.com/"}
         )
         info_data = info_res.json()
         self.__user.set_name(info_data["name"])
@@ -53,17 +53,10 @@ class Core:
         )
         login_res = self.__request.do_post(
             self.__api_url.login_api(
-                self.__user.get_username(),
-                login_hash,
-                data["nonce"],
-                cn,
+                self.__user.get_username(), login_hash, data["nonce"], cn
             ),
-            json={
-                "signType": "1",
-                "username": self.__user.get_username(),
-            },
             headers={
-                "Referer": "https://www.cqooc.com/login",
+                "Referer": "http://www.cqooc.com/login",
             },
         )
         data = login_res.json()
@@ -74,8 +67,59 @@ class Core:
             self.__process_user_info()
             return Msg().processing("登录成功", 200, data)
         else:
-            return Msg().processing(data["msg"], 400, data)
 
+            # 获取验证码
+            captcha_api = self.__api_url.get_captcha_api()
+            captcha_res = self.__request.do_get(captcha_api,{ "Referer": "http://www.cqooc.com/login",})
+            cdata = captcha_res.json()
+            # return Msg().processing("登录失败，可能需要官网登录后重试", 400, data)
+       
+            return Msg().processing(data["msg"], 400, cdata=cdata["img"],key=cdata["key"])
+    def __login_by_pwd2(self,captchaToken) -> dict:
+        print("pw2")
+        print(captchaToken)
+        api = self.__api_url.get_nonce_api()
+        nonce_res = self.__request.do_get(
+            api,
+            {
+                "Referer": "http://www.cqooc.com/login",
+            },
+        )
+        data = nonce_res.json()
+        cn = test.cnonce()
+        login_hash = test.getEncodePwd(
+            data["nonce"] + test.getEncodePwd(self.__user.get_pwd()) + cn
+        )
+
+        againlogin_post_data = self.__processor.process_againlogin_data(
+            "1", self.__user.get_username()
+        )           
+        login_res = self.__request.do_post(
+            self.__api_url.login_api2(
+                self.__user.get_username(), login_hash, data["nonce"], cn,captchaToken=captchaToken
+            ),
+            data=json.dumps(againlogin_post_data),
+            headers={
+                "Referer": "http://www.cqooc.com/login",
+            },
+        )
+        data = login_res.json()
+        print(data)
+        login_success = data["code"] == 0
+        if login_success:
+            self.__user.set_xsid(data["xsid"])
+            self.__request.set_headers("Cookie", f'xsid={data["xsid"]}')
+            self.__process_user_info()
+            return Msg().processing("登录成功", 200, data)
+        else:
+
+            # 获取验证码
+            captcha_api = self.__api_url.get_captcha_api()
+            captcha_res = self.__request.do_get(captcha_api,{ "Referer": "http://www.cqooc.com/login",})
+            cdata = captcha_res.json()
+            # return Msg().processing("登录失败，可能需要官网登录后重试", 400, data)
+       
+            return Msg().processing(data["msg"], 400, cdata=cdata["img"],key=cdata["key"])
     def __login_by_cookie(self) -> dict:
         cookie = self.__user.get_cookie()
         # parse cookie to dict
@@ -102,6 +146,38 @@ class Core:
             else self.__login_by_cookie()
         )
 
+
+    def get_captchaToken(self)->dict:   
+
+        captcha_post_data = self.__processor.process_captcha_data(
+            self.__captcha, self.__captcha_key
+        )   
+        get_captchaToken_url = self.__api_url.get_captchaToken_api()
+        get_captchaToken_res = self.__request.do_post(
+            get_captchaToken_url,
+            data=json.dumps(captcha_post_data),
+            headers={
+                "Referer": "http://www.cqooc.com/login",
+            },
+        ).json()      
+        print(get_captchaToken_res)
+        if str(get_captchaToken_res["code"]) == "0":
+            loginagainres = self.__login_by_pwd2(captchaToken=get_captchaToken_res["captchaToken"])
+
+            return loginagainres
+        elif str(get_captchaToken_res["code"]) == "1":
+            # 验证码出错重新获取验证码
+            captcha_api = self.__api_url.get_captcha_api()
+            captcha_res = self.__request.do_get(captcha_api,{ "Referer": "http://www.cqooc.com/login",})
+            cdata = captcha_res.json()
+            # return Msg().processing("登录失败，可能需要官网登录后重试", 400, data)
+       
+            return Msg().processing( code= "1", msg='验证码出错',cdata=cdata["img"],key=cdata["key"])            
+            return {
+                'code':'1',
+                'msg':'invalid captcha'
+            }
+   
     def get_user_info(self) -> dict:
         return Msg().processing("登录成功", 200, self.__user.get_info())
 
@@ -115,9 +191,7 @@ class Core:
         )
         course_data = self.__processor.process_course_data(course_res)
         self.__user.set_course_data(course_data.copy())
-        return Msg().processing(
-            "获取课程成功", 200, self.__user.get_course_data()
-        )  # noqa: E501
+        return Msg().processing("获取课程成功", 200, self.__user.get_course_data())
 
     def get_course_lessons(self, course_id: str) -> dict:
         mcs_id_res = self.__request.do_get(
@@ -238,9 +312,7 @@ class Core:
             },
         )
         self.__user.set_exams_data(exams.json().copy())
-        return Msg().processing(
-            "获取考试列表成功", 200, self.__user.get_exams_data()
-        )  # noqa: E501
+        return Msg().processing("获取考试列表成功", 200, self.__user.get_exams_data())
 
     def get_tasks_info(
         self, course_id: str, start: int = 0, limit: int = 200
@@ -253,9 +325,7 @@ class Core:
             },
         )
         self.__user.set_tasks_data(tasks.json().copy())
-        return Msg().processing(
-            "获取作业列表成功", 200, self.__user.get_tasks_data()
-        )  # noqa: E501
+        return Msg().processing("获取作业列表成功", 200, self.__user.get_tasks_data())
 
     def get_chapters_info(
         self, course_id: str, start: int = 0, limit: int = 200

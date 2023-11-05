@@ -67,3 +67,16 @@ class Processor:
         post_data["sectionId"] = section_data["sectionId"]
         post_data["username"] = section_data["username"]
         return post_data
+    
+    @staticmethod
+    def process_captcha_data(captcha: str, key: str) -> dict:
+        captcha_post_data = dict()
+        captcha_post_data["captcha"] = captcha
+        captcha_post_data["key"] = key
+        return captcha_post_data
+    @staticmethod
+    def process_againlogin_data(signType: str, username: str) -> dict:
+        captcha_againlogin_data = dict()
+        captcha_againlogin_data["signType"] = signType
+        captcha_againlogin_data["username"] = username
+        return captcha_againlogin_data
