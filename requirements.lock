@@ -8,14 +8,12 @@
 
 -e file:.
 backports-zoneinfo==0.2.1
-certifi==2023.5.7
-charset-normalizer==3.1.0
+certifi==2023.7.22
+charset-normalizer==3.3.2
 idna==3.4
 js2py==0.74
 pyjsparser==2.7.1
-pytz-deprecation-shim==0.1.0.post0
 requests==2.30.0
 six==1.16.0
-tzdata==2023.3
-tzlocal==4.3
-urllib3==2.0.2
+tzlocal==5.2
+urllib3==2.0.7
