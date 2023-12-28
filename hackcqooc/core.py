@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from typing import Optional
 from hackcqooc.request import Request
 from hackcqooc.user import User
 from hackcqooc.msg import Msg
@@ -12,7 +13,7 @@ import logging
 
 class Core:
     def __init__(
-        self, username: str = "", pwd: str = "", cookie: str = None
+        self, username: str = "", pwd: str = "", cookie: Optional[str] = None
     ) -> None:
         logging.info("Init Core")
         self.__processor = Processor()

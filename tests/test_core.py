@@ -5,8 +5,8 @@ import os
 
 # ROOT_PATH = os.path.dirname(os.path.dirname(__file__))
 
-username = os.environ.get("USERS")
-password = os.environ.get("PASSWORD")
+username = os.environ.get("USERS") or ""
+password = os.environ.get("PASSWORD") or ""
 
 
 def test_login_success():
@@ -52,9 +52,9 @@ def test_get_info():
     res = core.get_user_info()
     assert res["username"] == username
     assert res["pwd"] == password
-    assert res["xsid"] is None
-    assert res["id"] is None
-    assert res["name"] is None
+    assert res["xsid"] == ""
+    assert res["id"] == ""
+    assert res["name"] == ""
 
 
 def test_get_course():

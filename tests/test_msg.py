@@ -2,7 +2,6 @@
 from hackcqooc.msg import Msg
 
 susses = {"code": 200, "status": "ok", "msg": "成功"}
-
 fail = {"code": 400, "status": "fail", "msg": "失败"}
 
 
