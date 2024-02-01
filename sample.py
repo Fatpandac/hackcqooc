@@ -21,6 +21,10 @@ def print_green_sentence(sentence):
 
 
 def main():
+    if username is None or password is None:
+        print_red_sentence("Please set username and password")
+        exit(0)
+
     # Step 1, init object
     print_red_sentence("\nStep 1, init object")
     print_green_sentence(f"core = Core({username}, {password})")

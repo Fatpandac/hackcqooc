@@ -10,10 +10,13 @@
 backports-zoneinfo==0.2.1
 certifi==2023.7.22
 charset-normalizer==3.3.2
+fake-useragent==1.4.0
 idna==3.4
+importlib-resources==6.1.1
 js2py==0.74
 pyjsparser==2.7.1
 requests==2.30.0
 six==1.16.0
 tzlocal==5.2
 urllib3==2.0.7
+zipp==3.17.0
