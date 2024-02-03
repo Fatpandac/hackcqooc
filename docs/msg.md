@@ -33,4 +33,3 @@ processing(self, msg: str, code: int, res: dict = None) -> dict
 |msg|string|返回信息|
 |code|int|返回代码|
 |res|dict|具体数据|
-

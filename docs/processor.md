@@ -110,4 +110,3 @@ def process_section_data(section_data: dict, mcs_id: str) -> dict
 |parentId|string||
 |sectionId|string||
 |username|string||
-

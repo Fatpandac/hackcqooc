@@ -424,4 +424,3 @@ get_chapters_info(course_id: str, start: int = 0, limit: int = 200) -> dict
 | time | number | 时间 |
 | isPublish | number | 发布状态 |
 | isLeader | string |  |
-

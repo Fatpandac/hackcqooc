@@ -807,4 +807,3 @@ skip_section_api(self) -> str
 
  - 地址：https://www.cqooc.com/learnLog/api/add
  - 请求方法：get
-

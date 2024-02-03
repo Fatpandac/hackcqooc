@@ -88,5 +88,3 @@ def do_post(self,url: str,data: [dict, str] = None,json: dict = None,headers: di
 #### 返回内容
 
 返回内容为requests.Response，即requests库请求响应对象。
-
-

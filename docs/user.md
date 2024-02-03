@@ -76,4 +76,3 @@ get_info(self) -> dict
 |course_data|dict||
 |lessons_data|dict||
 |mcs_id|string||
-
