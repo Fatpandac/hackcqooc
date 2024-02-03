@@ -1,21 +1,24 @@
 # -*- coding: utf-8 -*-
+from typing import Optional, Union
+
+
 class User:
-    __xsid = None
-    __sid = None
-    __username = None
-    __pwd = None
-    __name = None
-    __course_data = None
-    __lessons_data = None
-    __exam_papers_data = None
-    __exams_data = None
-    __tasks_data = None
-    __chapters_data = None
-    __mcs_id = None
-    __cookie = None
+    __xsid = ""
+    __sid = ""
+    __username = ""
+    __pwd = ""
+    __name = ""
+    __course_data = {}
+    __lessons_data = {}
+    __exam_papers_data = {}
+    __exams_data = {}
+    __tasks_data = {}
+    __chapters_data = {}
+    __mcs_id = ""
+    __cookie = ""
 
     def __init__(
-        self, username: str = "", pwd: str = "", cookie: str = None
+        self, username: str = "", pwd: str = "", cookie: Optional[str] = None
     ) -> None:
         self.__username = username
         self.__pwd = pwd
@@ -93,7 +96,7 @@ class User:
     def get_chapters_data(self) -> dict:
         return self.__chapters_data
 
-    def get_cookie(self) -> str:
+    def get_cookie(self) -> Union[str, None]:
         return self.__cookie
 
     def get_info(self) -> dict:

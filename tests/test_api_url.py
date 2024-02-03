@@ -47,7 +47,7 @@ def test_nonce_api():
 def test_login_api():
     api_url = ApiUrl()
     assert api_url.login_api(username, login_hash, nonce, cn) == (
-        f"{host}/user/login"
+        f"{host}/account/login/log/api/do"
         + f"?username={username}&password={login_hash}"
         + f"&nonce={nonce}&cnonce={cn}"
     )

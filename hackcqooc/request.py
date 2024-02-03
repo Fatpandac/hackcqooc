@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from typing import Union
+from fake_useragent import UserAgent
 import requests
 import logging
 
@@ -13,10 +15,9 @@ import logging
 
 class Request:
     def __init__(self):
+        ua = UserAgent()
         self.__headers = {
-            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"
-            + " AppleWebKit/537.36 (KHTML, like Gecko)"
-            + " Chrome/101.0.0.0 Safari/537.36",
+            "User-Agent": ua.chrome,
         }
         self.__proxies = {
             "http": "",
@@ -39,7 +40,7 @@ class Request:
         return self.__proxies
 
     def __process_headers_and_proxies(
-        self, headers: dict = None, proxies: dict = None
+        self, headers: dict = {}, proxies: dict = {}
     ):
         self_headers = self.__headers.copy()
         if headers is not None:
@@ -52,7 +53,7 @@ class Request:
         return self_headers, self_proxies
 
     def do_get(
-        self, url: str, headers: dict = None, proxies: dict = None
+        self, url: str, headers: dict = {}, proxies: dict = {}
     ) -> requests.Response:
         headers, proxies = self.__process_headers_and_proxies(headers, proxies)
         res = requests.get(url, headers=headers, proxies=proxies)
@@ -63,10 +64,10 @@ class Request:
     def do_post(
         self,
         url: str,
-        data: [dict, str] = None,
-        json: dict = None,
-        headers: dict = None,
-        proxies: dict = None,
+        data: Union[dict, str] = "",
+        json: dict = {},
+        headers: dict = {},
+        proxies: dict = {},
     ) -> requests.Response:
         headers, proxies = self.__process_headers_and_proxies(headers, proxies)
         res = requests.post(

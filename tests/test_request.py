@@ -2,12 +2,6 @@
 
 from hackcqooc.request import Request
 
-ua = (
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"
-    + " AppleWebKit/537.36 (KHTML, like Gecko)"
-    + " Chrome/101.0.0.0 Safari/537.36"
-)
-
 proxies = {
     "http": "",
     "https": "",
@@ -18,7 +12,7 @@ proxiesURI = "http://127.0.0.1:8889"
 
 def test_get_ua():
     request = Request()
-    assert request.get_headers()["User-Agent"] == ua
+    assert isinstance(request.get_headers()["User-Agent"], str)
 
 
 def test_set_cookies():

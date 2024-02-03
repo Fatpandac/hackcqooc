@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+
+from typing import Any, Dict
+
+
 class Msg:
     def __init__(self):
         self.__susses = {
@@ -10,9 +14,9 @@ class Msg:
             "status": "fail",
         }
 
-    def processing(self, msg: str, code: int, res: dict = None) -> dict:
-        if res is None:
-            res = {}
+    def processing(
+        self, msg: str, code: int, res: Dict[str, Any] = {}
+    ) -> dict:
         if code == 200:
             res["code"] = self.__susses["code"]
             res["status"] = self.__susses["status"]

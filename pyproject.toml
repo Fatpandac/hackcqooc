@@ -5,7 +5,11 @@ description = "一个重庆高校在线开放课程平台自动化工具包。"
 authors = [
     { name = "Fatpandac", email = "i@fatpandac.com" }
 ]
-dependencies = ["requests~=2.30.0", "js2py~=0.74"]
+dependencies = [
+    "requests~=2.30.0",
+    "js2py>=0.74",
+    "fake-useragent>=1.4.0",
+]
 readme = "README.md"
 requires-python = ">= 3.8"
 license = { text = "MIT" }
