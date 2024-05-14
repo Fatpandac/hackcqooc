@@ -5,18 +5,32 @@
 #   pre: false
 #   features: []
 #   all-features: false
+#   with-sources: false
 
 -e file:.
 backports-zoneinfo==0.2.1
+    # via tzlocal
 certifi==2023.7.22
+    # via requests
 charset-normalizer==3.3.2
+    # via requests
 fake-useragent==1.4.0
+    # via hackcqooc
 idna==3.4
+    # via requests
 importlib-resources==6.1.1
+    # via fake-useragent
 js2py==0.74
+    # via hackcqooc
 pyjsparser==2.7.1
+    # via js2py
 requests==2.30.0
+    # via hackcqooc
 six==1.16.0
+    # via js2py
 tzlocal==5.2
+    # via js2py
 urllib3==2.0.7
+    # via requests
 zipp==3.17.0
+    # via importlib-resources

@@ -48,16 +48,18 @@ class Core:
             },
         )
         data = nonce_res.json()
-        cn = test.cnonce()
-        login_hash = test.getEncodePwd(
-            data["nonce"] + test.getEncodePwd(self.__user.get_pwd()) + cn
+        cn = test.cnonce()  # pyright: ignore
+        login_hash = test.getEncodePwd(  # pyright: ignore
+            data["nonce"]
+            + test.getEncodePwd(self.__user.get_pwd())  # pyright: ignore
+            + cn  # pyright: ignore
         )
         login_res = self.__request.do_post(
             self.__api_url.login_api(
                 self.__user.get_username(),
-                login_hash,
+                login_hash,  # pyright: ignore
                 data["nonce"],
-                cn,
+                cn,  # pyright: ignore
             ),
             json={
                 "signType": "1",
@@ -82,12 +84,12 @@ class Core:
         # parse cookie to dict
         cookie_dict = dict(
             item.split("=") if "=" in item else ""
-            for item in cookie.split(";")
-        )
+            for item in cookie.split(";")  # pyright: ignore
+        )  # pyright: ignore
         cookie = "; ".join(
             [f"{key}={value}" for key, value in cookie_dict.items()]
         )
-        self.__user.set_xsid(cookie_dict["xsid"])
+        self.__user.set_xsid(cookie_dict["xsid"])  # pyright: ignore
         self.__request.set_headers("Cookie", cookie)
         try:
             self.__process_user_info()
