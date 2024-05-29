@@ -21,7 +21,7 @@ __init__(username: str = "", pwd: str = "", cookie: str = None) -> None
 | :-: | :-: | - |
 |username|string|用户的用户名。|
 |pwd|string|用户的登陆密码。|
-|cookie|string|登陆网站之后产生的cookie，其名称为xsid。注意，不同session下产生的xsid不同，你不应当从浏览器的开发者工具中取得xsid进行登录。|
+|cookie|string|登陆网站之后产生的cookie，其名称为xsid。|
 
 #### 示例代码
 
@@ -52,7 +52,7 @@ core = Core(cookie = "XXXXXXXXXXXXXXXX")
 返回内容为JSON，其中包含的字段如下。
 
 | 属性 | 类型 | 说明 |
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |code|number|错误信息。为20时表示登陆成功，为400时表示登陆失败。|
 |status|string|状态信息|
 |msg|string|错误信息|
