@@ -8,7 +8,7 @@
 
 ### process_course_data
 
-```py
+```python
 @staticmethod
 def process_course_data(course_res: requests.Response) -> dict
 ```
@@ -20,7 +20,7 @@ def process_course_data(course_res: requests.Response) -> dict
 #### 参数
 
 |参数名称|类型|说明|
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |course_res|requests.Response|使用requests进行HTTP请求得到的返回对象，包含课程内容|
 
 #### 返回内容
@@ -28,14 +28,14 @@ def process_course_data(course_res: requests.Response) -> dict
 字典内的字段如下：
 
 |参数名称|类型|说明|
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |meta|dict|这部分内容和原本响应内容的meta部分相同|
 |data|list[dict]|字典列表，每个字典包含一个课程数据|
 
 课程数据字典字段如下：
 
 |参数名称|类型|说明|
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |courseId|string|课程ID|
 |ownerId|string|课程拥有者ID|
 |title|string|课程标题|
@@ -44,7 +44,7 @@ def process_course_data(course_res: requests.Response) -> dict
 
 ### process_lessons_data
 
-```py
+```python
 @staticmethod
 def process_lessons_data(username: str,lessons_res_meta: dict,
 lessons_res_data: List,lessons_status_res_data: List,) -> dict
@@ -57,7 +57,7 @@ lessons_res_data: List,lessons_status_res_data: List,) -> dict
 #### 参数
 
 |参数名称|类型|说明|
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |username|string||
 |lesson_res_meta|dict||
 |lesson_res__data|list||
@@ -68,7 +68,7 @@ lessons_res_data: List,lessons_status_res_data: List,) -> dict
 字典内的字段如下：
 
 |参数名称|类型|说明|
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |meta|dict|这部分内容和原本响应内容的meta部分相同|
 |data|list[dict]|字典列表，每个字典包含一个课时数据|
 
@@ -76,7 +76,7 @@ lessons_res_data: List,lessons_status_res_data: List,) -> dict
 
 ### process_section_data
 
-```py
+```python
 @staticmethod
 def process_section_data(section_data: dict, mcs_id: str) -> dict
 ```
@@ -88,7 +88,7 @@ def process_section_data(section_data: dict, mcs_id: str) -> dict
 #### 参数
 
 |参数名称|类型|说明|
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |section_data|dict||
 |mcs_id|string||
 
@@ -97,7 +97,7 @@ def process_section_data(section_data: dict, mcs_id: str) -> dict
 字典内的字段如下：
 
 |参数名称|类型|说明|
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |action|int||
 |category|int||
 |chapterId|string||

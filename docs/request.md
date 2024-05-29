@@ -8,7 +8,7 @@ request模块定义了Request类，其是对 [Requests](https://pypi.org/project
 
 ### 构造函数
 
-```py
+```python
 def __init__(self) -> None
 ```
 
@@ -25,7 +25,7 @@ def __init__(self) -> None
 Request类定义了下列属性。
 
 |属性名称|类型|说明|
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |headers|dict|对应HTTP请求头。除了setter和getter，还有del_headers函数。|
 |proxies|dict|对应HTTP参数代理配置|
 
@@ -50,7 +50,7 @@ def do_get(self, url: str, headers: dict = None, proxies: dict = None) -> reques
 #### 参数
 
 |属性名称|类型|说明|
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |url|string|请求的地址|
 |headers|dict|默认为None|
 |proxies|dict|默认为None|
@@ -63,7 +63,7 @@ def do_get(self, url: str, headers: dict = None, proxies: dict = None) -> reques
 
 ### do_post
 
-```py
+```python
 def do_post(self,url: str,data: [dict, str] = None,json: dict = None,headers: dict = None,proxies: dict = None,) -> requests.Response
 ```
 
@@ -74,7 +74,7 @@ def do_post(self,url: str,data: [dict, str] = None,json: dict = None,headers: di
 #### 参数
 
 |属性名称|类型|说明|
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |url|string|请求的地址|
 |data|list[dict, string]|默认为None|
 |json|dict|默认为None|

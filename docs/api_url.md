@@ -10,7 +10,9 @@ api_url 是一个用来获取 cqooc 网站的可用 API 的类。cqooc 的许多
 
 ### id_api
 
+```python
 id_api(self, xsid: str) -> str
+```
 
 #### 功能描述
 
@@ -19,7 +21,7 @@ id_api(self, xsid: str) -> str
 #### 参数
 
 | 属性 | 类型 | 说明 |
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |xsid|string|学生ID|
 
 #### API 信息
@@ -34,7 +36,7 @@ req.do_get(s).text # req为Request实例，下同
 ```
 
 返回内容如下：
-```json
+```js
 {
     "id": number，也就是id,
     "username": string，用户名称，通常是登录名,
@@ -49,7 +51,9 @@ req.do_get(s).text # req为Request实例，下同
 
 ### info_api
 
+```python
 info_api(self) -> str
+```
 
 #### 功能描述
 
@@ -68,7 +72,9 @@ info_api(self) -> str
 
 ### get_nonce_api
 
+```python
 get_nonce_api(self) -> str
+```
 
 #### 功能描述
 
@@ -91,7 +97,7 @@ req.do_get(api.get_nonce_api(),{ 'Referer': 'http://www.cqooc.com/login' }).text
 
 返回内容如下：
 
-```json
+```js
 {
     "nonce":string，nonce内容
 }
@@ -101,7 +107,9 @@ req.do_get(api.get_nonce_api(),{ 'Referer': 'http://www.cqooc.com/login' }).text
 
 ### course_api
 
+```python
 course_api(self, sid: str, limit: int) -> str
+```
 
 #### 功能描述
 
@@ -110,7 +118,7 @@ course_api(self, sid: str, limit: int) -> str
 #### 参数
 
 | 属性 | 类型 | 说明 |
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |sid|string|用户学生 ID|
 |limit|int|分页大小|
 
@@ -123,7 +131,7 @@ course_api(self, sid: str, limit: int) -> str
 
 由于字段非常多，这里不做详细的内容解释。
 
-```json
+```js
 {
     "meta": {
         "total": string,
@@ -225,7 +233,9 @@ course_api(self, sid: str, limit: int) -> str
 
 ### lessons_api
 
+```python
 lessons_api(self, course_id: str, start: int = 1, limit: int = 100) -> str
+```
 
 #### 功能描述
 
@@ -234,7 +244,7 @@ lessons_api(self, course_id: str, start: int = 1, limit: int = 100) -> str
 #### 参数
 
 | 属性 | 类型 | 说明 |
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |course_id|string|课程ID|
 |start|int|起始位置，默认为1|
 |limit|int|分页大小，默认值为100|
@@ -246,7 +256,7 @@ lessons_api(self, course_id: str, start: int = 1, limit: int = 100) -> str
 
 返回内容如下：
 
-```json
+```js
 {
     "meta": {
         "total": string,
@@ -312,7 +322,9 @@ lessons_api(self, course_id: str, start: int = 1, limit: int = 100) -> str
 
 ### lessons_status_api
 
+```python
 lessons_status_api(self, course_id: str, username: str, start: int = 1, limit: int = 100) -> str
+```
 
 #### 功能描述
 
@@ -321,7 +333,7 @@ lessons_status_api(self, course_id: str, username: str, start: int = 1, limit: i
 #### 参数
 
 | 属性 | 类型 | 说明 |
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |course_id|string|课程ID|
 |username|string|用户名|
 |start|int|起始位置，默认为1|
@@ -343,7 +355,7 @@ print(req.do_get(apiAddr, headers={
 
 返回内容如下：
 
-```json
+```js
 {
     "meta": {
         "total": string,
@@ -362,7 +374,9 @@ print(req.do_get(apiAddr, headers={
 
 ### mcs_id_api
 
+```python
 mcs_id_api(self, owner_id: str, course_id: str) -> str
+```
 
 #### 功能描述
 
@@ -371,7 +385,7 @@ mcs_id_api(self, owner_id: str, course_id: str) -> str
 #### 参数
 
 | 属性 | 类型 | 说明 |
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |owner_id|string|拥有该课程的用户ID，切勿和课程发布者ID混淆|
 |course_id|string|课程ID|
 
@@ -393,7 +407,7 @@ print(req.do_get(apiAddr, headers={
 
 返回内容如下：
 
-```json
+```js
 {
     "meta": {
         "total": string,
@@ -492,7 +506,9 @@ print(req.do_get(apiAddr, headers={
 
 ### learn_log_api
 
+```python
 learn_log_api(self, section_id: str, username: str) -> str
+```
 
 #### 功能描述
 
@@ -501,7 +517,7 @@ learn_log_api(self, section_id: str, username: str) -> str
 #### 参数
 
 | 属性 | 类型 | 说明 |
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |section_id|string|章节ID|
 |username|string|用户名|
 
@@ -509,7 +525,9 @@ learn_log_api(self, section_id: str, username: str) -> str
 
 ### exam_papers_api
 
+```python
 exam_papers_api(self, course_id: str, start: int = 0, limit: int = 200) -> str
+```
 
 #### 功能描述
 
@@ -518,7 +536,7 @@ exam_papers_api(self, course_id: str, start: int = 0, limit: int = 200) -> str
 #### 参数
 
 | 属性 | 类型 | 说明 |
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |course_id|string|课程ID|
 
 #### API信息
@@ -539,7 +557,7 @@ print(req.do_get(apiAddr, headers={
 
 返回内容如下：
 
-```json
+```js
 {
     "meta": {
         "start": "string",
@@ -568,7 +586,9 @@ print(req.do_get(apiAddr, headers={
 
 ### exams_api
 
+```python
 exams_api(self, course_id: str, start: int = 0, limit: int = 200) -> str
+```
 
 #### 功能描述
 
@@ -577,7 +597,7 @@ exams_api(self, course_id: str, start: int = 0, limit: int = 200) -> str
 #### 参数
 
 | 属性 | 类型 | 说明 |
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |course_id|string|课程ID|
 
 #### API信息
@@ -598,7 +618,7 @@ print(req.do_get(apiAddr, headers={
 
 返回内容如下：
 
-```json
+```js
 {
     "meta": {
         "total": "string",
@@ -629,7 +649,9 @@ print(req.do_get(apiAddr, headers={
 
 ### tasks_api
 
+```python
 tasks_api(self, course_id: str, start: int = 0, limit: int = 200) -> str
+```
 
 #### 功能描述
 
@@ -638,7 +660,7 @@ tasks_api(self, course_id: str, start: int = 0, limit: int = 200) -> str
 #### 参数
 
 | 属性 | 类型 | 说明 |
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |course_id|string|课程ID|
 
 #### API信息
@@ -659,7 +681,7 @@ print(req.do_get(apiAddr, headers={
 
 返回内容如下：
 
-```json
+```js
 {
     "meta": {
         "start": "string",
@@ -709,7 +731,9 @@ print(req.do_get(apiAddr, headers={
 
 ### chapters_api
 
+```python
 chapters_api(self, course_id: str, start: int = 0, limit: int = 200) -> str
+```
 
 #### 功能描述
 
@@ -718,7 +742,7 @@ chapters_api(self, course_id: str, start: int = 0, limit: int = 200) -> str
 #### 参数
 
 | 属性 | 类型 | 说明 |
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |course_id|string|课程ID|
 
 #### API信息
@@ -739,7 +763,7 @@ print(req.do_get(apiAddr, headers={
 
 返回内容如下：
 
-```json
+```js
 {
     "meta": {
         "start": "string",
@@ -805,7 +829,9 @@ print(req.do_get(apiAddr, headers={
 
 ### skip_section_api
 
+```python
 skip_section_api(self) -> str
+```
 
 #### 功能描述
 

@@ -7,7 +7,9 @@ core是一个公开可用的类，其中包含一些网站操作的函数。创�
 
 ### 构造函数
 
-`__init__(username: str = "", pwd: str = "", cookie: str = None) -> None`
+```python
+__init__(username: str = "", pwd: str = "", cookie: str = None) -> None
+```
 
 #### 功能描述
 
@@ -16,7 +18,7 @@ core是一个公开可用的类，其中包含一些网站操作的函数。创�
 #### 参数
 
 | 参数名 | 类型 | 说明 |
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |username|string|用户的用户名。|
 |pwd|string|用户的登陆密码。|
 |cookie|string|登陆网站之后产生的cookie，其名称为xsid。注意，不同session下产生的xsid不同，你不应当从浏览器的开发者工具中取得xsid进行登录。|
@@ -59,12 +61,12 @@ core = Core(cookie = "XXXXXXXXXXXXXXXX")
 
 #### 示例代码
 
-```
+```python
 core = Core("10611100000000", "iampassword")
 core.login()
 ```
 
-```json
+```js
 {'status': 'ok', 'code': 200, 'xsid': '000000000000000', 'msg': '登录成功'}
 ```
 
@@ -72,7 +74,9 @@ core.login()
 
 ### get_user_info
 
+```python
 get_user_indo() -> dict
+```
 
 #### 功能描述
 
@@ -84,12 +88,12 @@ get_user_indo() -> dict
 
 #### 返回值
 
-```json
+```js
 {'xsid': '000000000000000', 'id': 0000000, 'username': '00000000000000000', 'pwd': 'xxx', 'name': 'xxx', 'mcs_id': None, 'course_data': None, 'lessons_data': None, 'code': 200, 'status': 'ok', 'msg': '登录成功'}
 ```
 
 | 属性 | 类型 | 说明 |
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |xsid|string |学生ID。|
 |id|number||
 |username|string|用户名|
@@ -106,7 +110,9 @@ get_user_indo() -> dict
 
 ### get_course
 
+```python
 get_course() -> dict
+```
 
 #### 描述
 
@@ -119,7 +125,7 @@ get_course() -> dict
 #### 返回值
 
 | 属性 | 类型 | 说明 |
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |meta|dict|meta信息|
 |data|dict|课程数据|
 |code|number|状态码|
@@ -128,14 +134,14 @@ get_course() -> dict
 
 课程数据
 | 属性 | 类型 | 说明 |
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |courseId|dict|课程ID|
 |ownerId|dict|拥有者ID|
 |title|number|标题|
 
 meta信息
 | 属性 | 类型 | 说明 |
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |total|string|总数|
 |start|string|起始位|
 |size|string|总数|
@@ -144,7 +150,9 @@ meta信息
 
 ### get_course_lessons
 
+```py
 get_course_lessons(course_id: str) -> dict
+```
 
 #### 描述
 
@@ -153,13 +161,13 @@ get_course_lessons(course_id: str) -> dict
 #### 参数
 
 | 属性 | 类型 | 说明 |
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |course_id|string|课程ID|
 
 #### 返回值
 
 | 属性 | 类型 | 说明 |
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |meta|dict|meta信息|
 |data|list|课程数据|
 |code|number|状态码|
@@ -168,14 +176,14 @@ get_course_lessons(course_id: str) -> dict
 
 meta信息
 | 属性 | 类型 | 说明 |
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |total|string|总数|
 |start|string|起始位|
 |size|string|总数|
 
 课程数据
 | 属性 | 类型 | 说明 |
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |title|string|标题|
 |sectionId|string|节ID|
 |cateory|string|类|
@@ -190,7 +198,9 @@ meta信息
 
 ### skip_section
 
+```py
 skip_section(section_id: str) -> dict
+```
 
 #### 描述
 
@@ -199,17 +209,17 @@ skip_section(section_id: str) -> dict
 #### 参数
 
 | 属性 | 类型 | 说明 |
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |section_id|string|课程id|
 
 #### 返回值
 
-```json
+```js
 {'code': 200, 'status': 'ok', 'msg': '跳过课程成功'}
 ```
 
 | 属性 | 类型 | 说明 |
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |code|number|状态码|
 |status|string|状态信息|
 |msg|string|状态信息|
@@ -218,7 +228,9 @@ skip_section(section_id: str) -> dict
 
 ### get_exam_papers_info
 
+```py
 get_exam_papers_info(course_id: str, start: int = 0, limit: int = 200) -> dict
+```
 
 #### 描述
 
@@ -227,7 +239,7 @@ get_exam_papers_info(course_id: str, start: int = 0, limit: int = 200) -> dict
 #### 参数
 
 | 属性 | 类型 | 说明 |
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |course_id|string|课程ID|
 |start|number|起始位，默认值为0|
 |limit|number|限制，默认值为200|
@@ -235,7 +247,7 @@ get_exam_papers_info(course_id: str, start: int = 0, limit: int = 200) -> dict
 #### 返回值
 
 | 属性 | 类型 | 说明 |
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |meta|dict|meta信息|
 |data|dict|测验数据|
 |code|number|状态码|
@@ -244,7 +256,7 @@ get_exam_papers_info(course_id: str, start: int = 0, limit: int = 200) -> dict
 
 测验数据
 | 属性 | 类型 | 说明 |
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |id|number||
 |created|number|创建时间|
 |ownerId|number|拥有者ID|
@@ -261,7 +273,9 @@ get_exam_papers_info(course_id: str, start: int = 0, limit: int = 200) -> dict
 
 ### get_exams_info
 
+```python
 get_exams_info(course_id: str, start: int = 0, limit: int = 200) -> dict
+```
 
 #### 描述
 
@@ -270,7 +284,7 @@ get_exams_info(course_id: str, start: int = 0, limit: int = 200) -> dict
 #### 参数
 
 | 属性 | 类型 | 说明 |
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |course_id|string|课程ID|
 |start|number|起始位，默认值为0|
 |limit|number|限制，默认值为200|
@@ -278,7 +292,7 @@ get_exams_info(course_id: str, start: int = 0, limit: int = 200) -> dict
 #### 返回值
 
 | 属性 | 类型 | 说明 |
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |meta|dict|meta信息|
 |data|dict|测验数据|
 |code|number|状态码|
@@ -287,7 +301,7 @@ get_exams_info(course_id: str, start: int = 0, limit: int = 200) -> dict
 
 测验数据
 | 属性 | 类型 | 说明 |
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |id|number||
 |created|number|创建时间|
 |ownerId|number|拥有者ID|
@@ -306,7 +320,9 @@ get_exams_info(course_id: str, start: int = 0, limit: int = 200) -> dict
 
 ### get_tasks_info
 
+```python
 get_tasks_info(course_id: str, start: int = 0, limit: int = 200) -> dict\
+```
 
 #### 描述
 
@@ -315,7 +331,7 @@ get_tasks_info(course_id: str, start: int = 0, limit: int = 200) -> dict\
 #### 参数
 
 | 属性 | 类型 | 说明 |
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |course_id|string|课程ID|
 |start|number|起始位，默认值为0|
 |limit|number|限制，默认值为200|
@@ -323,7 +339,7 @@ get_tasks_info(course_id: str, start: int = 0, limit: int = 200) -> dict\
 #### 返回值
 
 | 属性 | 类型 | 说明 |
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |meta|dict|meta信息|
 |data|dict|作业数据|
 |code|number|状态码|
@@ -332,7 +348,7 @@ get_tasks_info(course_id: str, start: int = 0, limit: int = 200) -> dict\
 
 作业数据
 | 属性 | 类型 | 说明 |
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |id|number||
 |title|string|标题|
 |unitId|string|单元ID|
@@ -362,7 +378,7 @@ get_tasks_info(course_id: str, start: int = 0, limit: int = 200) -> dict\
 
 章节数据
 | 属性 | 类型 | 说明 |
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |id|string||
 |title|string|标题|
 |status|string|状态|
@@ -372,7 +388,9 @@ get_tasks_info(course_id: str, start: int = 0, limit: int = 200) -> dict\
 
 ### get_chapters_info
 
+```python
 get_chapters_info(course_id: str, start: int = 0, limit: int = 200) -> dict
+```
 
 #### 描述
 
@@ -381,7 +399,7 @@ get_chapters_info(course_id: str, start: int = 0, limit: int = 200) -> dict
 #### 参数
 
 | 属性 | 类型 | 说明 |
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |course_id|string|课程ID|
 |start|number|起始位，默认值为0|
 |limit|number|限制，默认值为200|
@@ -389,7 +407,7 @@ get_chapters_info(course_id: str, start: int = 0, limit: int = 200) -> dict
 #### 返回值
 
 | 属性 | 类型 | 说明 |
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 | teachDesign | null |  |
 | importPointFileId | null |  |
 | courseId | string | 课程ID |

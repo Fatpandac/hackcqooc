@@ -20,7 +20,7 @@ test模块是一个使用js2py生成的模块，其中包含了一些cqooc网站
 
 #### 参考代码
 
-```py
+```python
 from hackcqooc.test import test
 
 test.cnonce()
@@ -38,7 +38,7 @@ test.cnonce()
 #### 参数
 
 |参数名称|类型|说明|
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |param1（暂定，实际上没有参数名）|string|待编码处理的文本|
 
 #### 参考代码

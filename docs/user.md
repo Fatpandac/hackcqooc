@@ -8,7 +8,9 @@ user模块中定义了User类，这是对cqooc用户的一个简要描述，其�
 
 ### 构造函数
 
-` __init__(self, username: str = "", pwd: str = "", cookie: str = None) -> None `
+```python
+__init__(self, username: str = "", pwd: str = "", cookie: str = None) -> None
+```
 
 #### 功能描述
 
@@ -17,7 +19,7 @@ user模块中定义了User类，这是对cqooc用户的一个简要描述，其�
 #### 参数
 
 |参数名称|类型|说明|
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |username|string|用户名，默认值为""|
 |pwd|string|密码，默认值为""|
 |cookie|string|cookie，默认值为None|
@@ -29,7 +31,7 @@ user模块中定义了User类，这是对cqooc用户的一个简要描述，其�
 User类定义了下列属性。
 
 |属性名称|类型|说明|
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |xsid|string||
 |sid|string|setter和getter函数名分别为set_id和get_id|
 |username|string||
@@ -48,7 +50,9 @@ User类定义了下列属性。
 
 ### get_info
 
+```python
 get_info(self) -> dict
+```
 
 #### 功能描述
 
@@ -63,7 +67,7 @@ get_info(self) -> dict
 返回的dict中包含以下内容。
 
 |属性名称|类型|说明|
-| :-: | :-: | :-: |
+| :-: | :-: | - |
 |xsid|string||
 |id|string||
 |username|string||
