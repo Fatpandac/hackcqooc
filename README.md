@@ -9,6 +9,8 @@
 在终端环境中分别设置变量 `USERS` 和 `PASSWORD`
 后运行 `python3 sample.py` 它将会告诉你 Hackcqooc 的运行方式。
 
+你还可以查看文档获取更多信息，[点击跳转文档](/docs/readme.md)。
+
 ## 安装
 
 ```
