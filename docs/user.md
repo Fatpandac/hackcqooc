@@ -4,19 +4,11 @@
 
 user模块中定义了User类，这是对cqooc用户的一个简要描述，其中定义了一些cqooc用户的个人信息。
 
- - 覆盖模块：user.py
-
- - 最后更新：August 29th, 2022
-
- - 作者：Fatpandac, omg-xtao
-
- - 文档作者：RX-105
-
 ## 内容
 
 ### 构造函数
 
-\_\_init\_\_(self, username: str = "", pwd: str = "", cookie: str = None) -> None
+` __init__(self, username: str = "", pwd: str = "", cookie: str = None) -> None `
 
 #### 功能描述
 
@@ -29,6 +21,8 @@ user模块中定义了User类，这是对cqooc用户的一个简要描述，其�
 |username|string|用户名，默认值为""|
 |pwd|string|密码，默认值为""|
 |cookie|string|cookie，默认值为None|
+
+---
 
 ### setters & getters
 
@@ -49,6 +43,8 @@ User类定义了下列属性。
 |chapters_data|dict||
 |mcs_id|string||
 |cookie|string|cookie只有getter|
+
+---
 
 ### get_info
 

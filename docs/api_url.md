@@ -2,23 +2,11 @@
 
 ## 概览
 
-api_url是一个用来获取cqooc网站的可用API的类。cqooc的许多api都需要携带一个时间戳参数，所以不能使用静态的API地址，而是需要这个类提供的函数来动态生成地址。每一个core实例都包含一个api_url实例。
+api_url 是一个用来获取 cqooc 网站的可用 API 的类。cqooc 的许多 API 都需要携带一个时间戳参数，所以不能使用静态的 API 地址，而是需要这个类提供的函数来动态生成地址。每一个 core 实例都包含一个 api_url 实例。
 
-需要注意的是，cqooc的许多API采取了防盗链措施，需要添加合适的Referer header。有些API的样例代码包含如何使用Referer的举例，但不同的API可能使用不同的Referer，具体值请参考cqooc网站上的实际请求字段。
-
-- 覆盖模块：api_url.py
-
-- 最后更新时间：July 4th, 2022
-
-- 作者：Fatpandac, Xtao
-
-- 文档作者：RX-105
+需要注意的是，cqooc 的许多 API 采取了防盗链措施，需要添加合适的 Referer Header。有些 API 的样例代码包含如何使用 Referer 的举例，但不同的 API 可能使用不同的 Referer，具体值请参考 cqooc 网站上的实际请求字段。
 
 ## 内容
-
-### 构造函数
-
-这个类没有显式定义的构造函数。
 
 ### id_api
 
@@ -26,7 +14,7 @@ id_api(self, xsid: str) -> str
 
 #### 功能描述
 
-生成获取id的api。
+生成获取 id 的 API。
 
 #### 参数
 
@@ -34,7 +22,7 @@ id_api(self, xsid: str) -> str
 | :-: | :-: | :-: |
 |xsid|string|学生ID|
 
-#### API信息
+#### API 信息
 
  - 地址：https://www.cqooc.com/user/session?xsid={XSID}&ts={TS}
  - 请求方法：get
@@ -57,6 +45,8 @@ req.do_get(s).text # req为Request实例，下同
 }
 ```
 
+---
+
 ### info_api
 
 info_api(self) -> str
@@ -69,10 +59,12 @@ info_api(self) -> str
 
 无。
 
-#### API信息
+#### API 信息
 
  - 地址：https://www.cqooc.com/account/session/api/profile/get?ts={TS}
  - 请求方法：get
+
+---
 
 ### get_nonce_api
 
@@ -80,13 +72,13 @@ get_nonce_api(self) -> str
 
 #### 功能描述
 
-生成获取nonce的API，这是其他有些API需要用到的参数。
+生成获取 nonce 的 API，这是其他有些 API 需要用到的参数。
 
 #### 参数
 
 无。
 
-#### API描述
+#### API 信息
 
  - 地址：https://www.cqooc.com/user/login?ts={TS}
  - 请求方法：get
@@ -97,7 +89,7 @@ get_nonce_api(self) -> str
 req.do_get(api.get_nonce_api(),{ 'Referer': 'http://www.cqooc.com/login' }).text
 ```
 
-##### 返回内容
+返回内容如下：
 
 ```json
 {
@@ -105,19 +97,21 @@ req.do_get(api.get_nonce_api(),{ 'Referer': 'http://www.cqooc.com/login' }).text
 }
 ```
 
+---
+
 ### course_api
 
 course_api(self, sid: str, limit: int) -> str
 
 #### 功能描述
 
-生成获取课程的API。
+生成获取课程的 API。
 
 #### 参数
 
 | 属性 | 类型 | 说明 |
 | :-: | :-: | :-: |
-|sid|string|其实这应该是ownerId吧|
+|sid|string|用户学生 ID|
 |limit|int|分页大小|
 
 #### API信息
@@ -125,7 +119,7 @@ course_api(self, sid: str, limit: int) -> str
  - 地址：https://www.cqooc.com/json/mcs?sortby={SORTBY}&reverse={BOOLEAN}&del={DEL}&courseType={COURSE_TYPE}&ownerId={OWNER_ID}&limit={LIMIT}&ts={TS}
  - 请求方法：get
 
-##### 返回内容
+返回内容如下：
 
 由于字段非常多，这里不做详细的内容解释。
 
@@ -227,6 +221,8 @@ course_api(self, sid: str, limit: int) -> str
 }
 ```
 
+---
+
 ### lessons_api
 
 lessons_api(self, course_id: str, start: int = 1, limit: int = 100) -> str
@@ -248,7 +244,7 @@ lessons_api(self, course_id: str, start: int = 1, limit: int = 100) -> str
  - 地址：https://www.cqooc.com/json/mooc/lessons?limit={LIMIT}&start={START}&sortby={SORT_BY}&reverse={REVERSE}&courseId={COURSE_ID}&ts={TS}
  - 请求方法：get
 
-##### 返回内容
+返回内容如下：
 
 ```json
 {
@@ -312,6 +308,8 @@ lessons_api(self, course_id: str, start: int = 1, limit: int = 100) -> str
 }
 ```
 
+---
+
 ### lessons_status_api
 
 lessons_status_api(self, course_id: str, username: str, start: int = 1, limit: int = 100) -> str
@@ -343,7 +341,7 @@ print(req.do_get(apiAddr, headers={
                 }).text)
 ```
 
-##### 返回内容
+返回内容如下：
 
 ```json
 {
@@ -360,13 +358,15 @@ print(req.do_get(apiAddr, headers={
 }
 ```
 
+---
+
 ### mcs_id_api
 
 mcs_id_api(self, owner_id: str, course_id: str) -> str
 
 #### 功能描述
 
-生成获取mcs_id的API。
+生成获取 mcs_id 的 API。
 
 #### 参数
 
@@ -391,7 +391,7 @@ print(req.do_get(apiAddr, headers={
                 }).text)
 ```
 
-##### 返回内容
+返回内容如下：
 
 ```json
 {
@@ -488,6 +488,8 @@ print(req.do_get(apiAddr, headers={
 }
 ```
 
+---
+
 ### learn_log_api
 
 learn_log_api(self, section_id: str, username: str) -> str
@@ -502,6 +504,8 @@ learn_log_api(self, section_id: str, username: str) -> str
 | :-: | :-: | :-: |
 |section_id|string|章节ID|
 |username|string|用户名|
+
+---
 
 ### exam_papers_api
 
@@ -533,7 +537,7 @@ print(req.do_get(apiAddr, headers={
                 }).text)
 ```
 
-##### 返回内容
+返回内容如下：
 
 ```json
 {
@@ -559,6 +563,8 @@ print(req.do_get(apiAddr, headers={
     ]
 }
 ```
+
+---
 
 ### exams_api
 
@@ -590,7 +596,7 @@ print(req.do_get(apiAddr, headers={
                 }).text)
 ```
 
-##### 返回内容
+返回内容如下：
 
 ```json
 {
@@ -618,6 +624,8 @@ print(req.do_get(apiAddr, headers={
     ]
 }
 ```
+
+---
 
 ### tasks_api
 
@@ -649,7 +657,7 @@ print(req.do_get(apiAddr, headers={
                 }).text)
 ```
 
-##### 返回内容
+返回内容如下：
 
 ```json
 {
@@ -697,6 +705,8 @@ print(req.do_get(apiAddr, headers={
 
 ```
 
+---
+
 ### chapters_api
 
 chapters_api(self, course_id: str, start: int = 0, limit: int = 200) -> str
@@ -727,7 +737,7 @@ print(req.do_get(apiAddr, headers={
                 }).text)
 ```
 
-##### 返回内容
+返回内容如下：
 
 ```json
 {
@@ -790,6 +800,8 @@ print(req.do_get(apiAddr, headers={
 }
 
 ```
+
+---
 
 ### skip_section_api
 

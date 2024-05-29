@@ -4,14 +4,6 @@
 
 这个模块包含了一些处理cqooc请求返回内容的函数。cqooc的返回内容较多，包含一些当前环境下不使用的数据，可以使用这里的函数进行处理。
 
- - 覆盖模块：processor.py
-
- - 最后更新：October 6th, 2022
-
- - 作者：Fatpandac, omg-xtao
-
- - 文档作者：RX-105
-
 ## 内容
 
 ### process_course_data
@@ -48,6 +40,8 @@ def process_course_data(course_res: requests.Response) -> dict
 |ownerId|string|课程拥有者ID|
 |title|string|课程标题|
 
+---
+
 ### process_lessons_data
 
 ```py
@@ -77,6 +71,8 @@ lessons_res_data: List,lessons_status_res_data: List,) -> dict
 | :-: | :-: | :-: |
 |meta|dict|这部分内容和原本响应内容的meta部分相同|
 |data|list[dict]|字典列表，每个字典包含一个课时数据|
+
+---
 
 ### process_section_data
 

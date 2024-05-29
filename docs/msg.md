@@ -4,23 +4,15 @@
 
 msg类是一个工具库，包含了一些用于处理API返回内容的函数。
 
- - 覆盖模块：msg.py
-
- - 最后更新时间：July 4th, 2022
-
- - 作者：Fatpandac
-
- - 文档作者：RX-105
-
 ## 内容
 
 ### 构造函数
 
-\_\_init\_\_(self)
+`__init__(self)`
 
 ### processing
 
-processing(self, msg: str, code: int, res: dict = None) -> dict
+`processing(self, msg: str, code: int, res: dict = None) -> dict`
 
 #### 功能描述
 

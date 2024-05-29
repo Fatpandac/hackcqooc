@@ -3,14 +3,6 @@
 ## 概览
 core是一个公开可用的类，其中包含一些网站操作的函数。创建一个core对象必须提供网站的用户名和密码。
 
-- 覆盖模块：core.py
-
-- 最后更新时间：2023/07/09
-
-- 作者：Fatpandac, Xtao
-
-- 文档作者：RX-105
-
 ## 内容
 
 ### 构造函数
@@ -39,6 +31,7 @@ core = Core("10611100000000", "password")
 core = Core(cookie = "XXXXXXXXXXXXXXXX")
 ```
 
+---
 
 ### login
 
@@ -75,6 +68,8 @@ core.login()
 {'status': 'ok', 'code': 200, 'xsid': '000000000000000', 'msg': '登录成功'}
 ```
 
+---
+
 ### get_user_info
 
 get_user_indo() -> dict
@@ -106,6 +101,8 @@ get_user_indo() -> dict
 |code|number|状态码|
 |status|string|状态信息|
 |msg|string|状态信息|
+
+---
 
 ### get_course
 
@@ -143,6 +140,7 @@ meta信息
 |start|string|起始位|
 |size|string|总数|
 
+---
 
 ### get_course_lessons
 
@@ -188,6 +186,8 @@ meta信息
 |username|string|用户名|
 |status|string|状态|
 
+---
+
 ### skip_section
 
 skip_section(section_id: str) -> dict
@@ -213,6 +213,8 @@ skip_section(section_id: str) -> dict
 |code|number|状态码|
 |status|string|状态信息|
 |msg|string|状态信息|
+
+---
 
 ### get_exam_papers_info
 
@@ -254,6 +256,8 @@ get_exam_papers_info(course_id: str, start: int = 0, limit: int = 200) -> dict
 |number|number||
 |content|string|内容|
 |score|number|分值|
+
+---
 
 ### get_exams_info
 
@@ -297,6 +301,8 @@ get_exams_info(course_id: str, start: int = 0, limit: int = 200) -> dict
 |score|number|分值|
 |time|number|时间|
 |answerTime|number|完成时间|
+
+---
 
 ### get_tasks_info
 
@@ -361,6 +367,8 @@ get_tasks_info(course_id: str, start: int = 0, limit: int = 200) -> dict\
 |title|string|标题|
 |status|string|状态|
 |pubClass|string||
+
+---
 
 ### get_chapters_info
 

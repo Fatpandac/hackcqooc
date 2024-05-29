@@ -2,15 +2,7 @@
 
 ## 概述
 
-request模块定义了Request类，其中提供了一些和网络请求相关的函数。
-
- - 覆盖模块：request.py
-
- - 最后更新：August 14th, 2023
-
- - 作者：Fatpandac, omg-xtao
-
- - 文档作者：RX-105
+request模块定义了Request类，其是对 [Requests](https://pypi.org/project/requests/) 的二次封装，其中提供了一些和网络请求相关的函数。
 
 ## 内容
 
@@ -43,6 +35,8 @@ Request类定义了下列属性。
 
  - del：给定key，删除字典中这个属性的值。
 
+---
+
 ### do_get
 
 ```py
@@ -64,6 +58,8 @@ def do_get(self, url: str, headers: dict = None, proxies: dict = None) -> reques
 #### 返回内容
 
 返回内容为requests.Response，即requests库请求响应对象。
+
+---
 
 ### do_post
 
