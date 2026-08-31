@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
-from hackcqooc.core import Core
-
 import os
+
+from hackcqooc.core import Core
 
 # ROOT_PATH = os.path.dirname(os.path.dirname(__file__))
 
