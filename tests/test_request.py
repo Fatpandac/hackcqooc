@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from hackcqooc.request import Request
 
 proxies = {

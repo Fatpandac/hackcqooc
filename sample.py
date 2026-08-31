@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
+import json
+import os
 
 from hackcqooc.core import Core
-import os
-import json
 
 username = os.environ.get("USERS")
 password = os.environ.get("PASSWORD")
