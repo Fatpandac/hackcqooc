@@ -1,8 +1,6 @@
-# -*- coding: utf-8 -*-
+import time
 
 from hackcqooc.api_url import ApiUrl
-
-import time
 
 
 def get_ts():
