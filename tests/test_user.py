@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from hackcqooc.user import User
 
 xsid = "ASD121AS1"
