@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
-from typing import Union
-from fake_useragent import UserAgent
-import requests
 import logging
+from typing import Union
+
+import requests
+from fake_useragent import UserAgent
 
 # logging.basicConfig(
 #     level=logging.INFO,
