@@ -1,14 +1,13 @@
-# -*- coding: utf-8 -*-
-from typing import Optional
-from hackcqooc.request import Request
-from hackcqooc.user import User
-from hackcqooc.msg import Msg
-from hackcqooc.test import test
-from hackcqooc.processor import Processor
-from hackcqooc.api_url import ApiUrl
-
 import json
 import logging
+from typing import Optional
+
+from hackcqooc.api_url import ApiUrl
+from hackcqooc.msg import Msg
+from hackcqooc.processor import Processor
+from hackcqooc.request import Request
+from hackcqooc.test import test
+from hackcqooc.user import User
 
 
 class Core:
@@ -120,7 +119,7 @@ class Core:
         self.__user.set_course_data(course_data.copy())
         return Msg().processing(
             "获取课程成功", 200, self.__user.get_course_data()
-        )  # noqa: E501
+        )
 
     def get_course_lessons(self, course_id: str) -> dict:
         mcs_id_res = self.__request.do_get(
@@ -243,7 +242,7 @@ class Core:
         self.__user.set_exams_data(exams.json().copy())
         return Msg().processing(
             "获取考试列表成功", 200, self.__user.get_exams_data()
-        )  # noqa: E501
+        )
 
     def get_tasks_info(
         self, course_id: str, start: int = 0, limit: int = 200
@@ -258,7 +257,7 @@ class Core:
         self.__user.set_tasks_data(tasks.json().copy())
         return Msg().processing(
             "获取作业列表成功", 200, self.__user.get_tasks_data()
-        )  # noqa: E501
+        )
 
     def get_chapters_info(
         self, course_id: str, start: int = 0, limit: int = 200
