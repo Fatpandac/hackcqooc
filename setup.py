@@ -1,15 +1,15 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 # Note: To use the 'upload' functionality of this file, you must:
 #   $ pipenv install twine --dev
 
-import io
 import os
 import sys
 from shutil import rmtree
+
+from setuptools import Command, find_packages, setup
+
 from hackcqooc import __version__
-from setuptools import find_packages, setup, Command
 
 # Package meta-data.
 NAME = "hackcqooc"
@@ -42,7 +42,7 @@ here = os.path.abspath(os.path.dirname(__file__))
 # Import the README and use it as the long-description.
 # Note: this will only work if 'README.md' is present in your MANIFEST.in file!
 try:
-    with io.open(os.path.join(here, "README.md"), encoding="utf-8") as f:
+    with open(os.path.join(here, "README.md"), encoding="utf-8") as f:
         long_description = "\n" + f.read()
 except FileNotFoundError:
     long_description = DESCRIPTION
@@ -66,7 +66,7 @@ class UploadCommand(Command):
     @staticmethod
     def status(s):
         """Prints things in bold."""
-        print("\033[1m{0}\033[0m".format(s))
+        print(f"\033[1m{s}\033[0m")
 
     def initialize_options(self):
         pass
@@ -82,9 +82,7 @@ class UploadCommand(Command):
             pass
 
         self.status("Building Source and Wheel (universal) distribution…")
-        os.system(
-            "{0} setup.py sdist bdist_wheel --universal".format(sys.executable)
-        )
+        os.system(f"{sys.executable} setup.py sdist bdist_wheel --universal")
 
         self.status("Uploading the package to PyPI via Twine…")
         os.system("twine upload dist/*")
