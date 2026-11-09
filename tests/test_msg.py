@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from hackcqooc.msg import Msg
 
 susses = {"code": 200, "status": "ok", "msg": "成功"}
