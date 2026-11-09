@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from hackcqooc.processor import Processor
 
 section_data = {
